@@ -1,0 +1,15 @@
+
+sudo apt-get upgrade  #Upgrades installs
+
+   #Could do   'cd ~'
+#              'mkdir texmf'
+
+   77  sudo apt-get install xzdec
+   78  tlmgr init-usertree
+   
+   80  tlmgr option repository ftp://tug.org/historic/systems/texlive/2015/tlnet-final  #change repository location 
+   81  tlmgr install sectsty                                                            #Finally Installed latex package
+
+
+tlmgr update <package name>   #update package
+tlmgr update --self --all     #update all packages
