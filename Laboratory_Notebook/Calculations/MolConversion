@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+"""
+MolConversion converts Molarity to Molality
+and Molality to Molarity with a concentration
+
+"""
+
+__author__     =  "Paul Mendoza"
+__copyright__  =  "Copyright 2016, Planet Earth"
+__credits__    = ["Sunil Chirayath",
+                  "Charles Folden",
+                  "Jeremy Conlin"]
+__license__    =  "GPL"
+__version__    =  "1.0.1"
+__maintainer__ =  "Paul Mendoza"
+__email__      =  "paul.m.mendoza@gmail.com"
+__status__     =  "Production"
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import os.path
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime
+from uncertainties import ufloat
+from uncertainties.umath import *
+
+################################################################
+################### Import Own Functions #######################
+################################################################
+
+
+################################################################
+######################## Conditions ############################
+################################################################
+
+MolarityToMolality=False
+
+################################################################
+####################### Gather Data ############################
+################################################################
+
+gramsOmol=20.01
+#Density in grams per cc or grams per ml
+density=ufloat(1.101,0.02)
+Molality=ufloat(21.4,0.2) #HF
+
+Molarity=ufloat(16.5,0.1)
+
+################################################################
+###################### Calculation #############################
+################################################################
+
+if MolarityToMolality:
+    #(mols/kg)
+    Molality=1/(density/Molarity-gramsOmol*0.001)
+else:
+    #(mols/L)
+    Molarity=density/(1/Molality+gramsOmol*0.001)
+
+print("Molarity = "+str(Molarity))
+print("Molality = "+str(Molality))
+
+
+
+
+
+
+
+
+
+
