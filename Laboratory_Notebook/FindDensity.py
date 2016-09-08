@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 """
-Read_Table reads a table from the internet and stores
-in a .csv file
+MolConversion converts Molarity to Molality
+and Molality to Molarity with a concentration
+
 """
 
 __author__     =  "Paul Mendoza"
@@ -25,3 +26,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime
+from uncertainties import ufloat
+from uncertainties.umath import *
+
+

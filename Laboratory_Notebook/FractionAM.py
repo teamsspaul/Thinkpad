@@ -71,6 +71,7 @@ def FindAtomicMass(df,proton,Isotope):
     Isotope = string with isotope number (just put the atomic mass
     do not follow MCNP format - different for few cases)
     """
+    print(df)
     for i in range(0,len(df.Protons)):
         dfPro=str(df.Protons[i])
         if proton==dfPro:
