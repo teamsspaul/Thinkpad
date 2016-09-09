@@ -46,7 +46,7 @@ for i in range(0,len(content)):
         continue
     line=content[i]                #Save each line in easier variable    
     line=line.replace('\n',' ')    #Remove newline characters
-    line=line.replace(',','-')
+    line=line.replace(',','-')     #Change , with -
 
     if not line[0].isspace(): #If the first element is not a space
                               #Then its an important number
@@ -56,6 +56,9 @@ for i in range(0,len(content)):
         if(len(listline)==6):
             listline=np.append(np.append(listline[0:4],['NaN']),
                                listline[4:6])
+        if(len(listline)==5):
+            listline=np.append(np.append(listline[0:4],['NaN']),
+                               listline[4:5])
     else:
         listline=line.split()
         listline=np.append([Numreplace,Symreplace],listline)

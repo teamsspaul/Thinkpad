@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+
+"""
+Chem Calculations
+"""
+
+__author__     =  "Paul Mendoza"
+__copyright__  =  "Copyright 2016, Planet Earth"
+__credits__    = ["Sunil Chirayath",
+                  "Charles Folden",
+                  "Jeremy Conlin"]
+__license__    =  "GPL"
+__version__    =  "1.0.1"
+__maintainer__ =  "Paul Mendoza"
+__email__      =  "paul.m.mendoza@gmail.com"
+__status__     =  "Production"
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import os.path
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime
+from uncertainties import ufloat
+from uncertainties.umath import *
+from uncertainties import unumpy as unp
+import re
+
+import Functions as fun
+
+
+################################################################
+################## Examples of Calculations ####################
+################################################################
+
+#######################################################
+############ Atom Fraction to Mass Fraction ###########
+############          and vice versa        ###########
+#######################################################
+
+string='92235 0.285714286 0 92238 0.714285714 0'
+MasstoAtom=True
+Mass,Zaid=fun.StringToMass(string)
+stringCalculated=fun.ConvertFractions(string,Mass,MasstoAtom,Zaid)
+
+if MasstoAtom:
+    print("Mass Fractions:")
+    print(string)
+    print("Atom Fractions:")
+    print(stringCalculated)
+else:
+    print("Mass Fractions:")
+    print(stringCalculated)
+    print("Atom Fractions:")
+    print(string)
+
+#######################################################
+############ Calculate grams per mol of ###############
+############    a chemical formula      ###############
+#######################################################
+
+ChemicalFormula='He_800O_2Na_1'
+ChemicalFormula=ChemicalFormula+"    "
+
+#Make sure your chemical form has no repeats
+#And no parentheses
+List=fun.ChemList(ChemicalFormula)
+
+
+
+df = pd.read_csv('../Data/AtomicWeights.csv')
+
+for i in range(0,len(List)):
+    Symbol=List[i].split("_")[0]
+    Multiplier=List[i].split("_")[1]
+    for j in range(0,len(df.Symbol)):
+        if Symbol==str(df.Symbol[j]):
+            print(Symbol+" "+str(df.Standard_Atomic_Weight[j]))
+            break
+
+
+
+#find atom fractions of elements
+
+
+
+
+
+
+
+
+
+
+MolarityToMolality=False

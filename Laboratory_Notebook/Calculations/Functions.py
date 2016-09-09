@@ -29,6 +29,7 @@ import datetime
 from uncertainties import ufloat
 from uncertainties.umath import *
 from uncertainties import unumpy as unp
+import re
 
 ################################################################
 ######################### Functions ############################
@@ -36,7 +37,9 @@ from uncertainties import unumpy as unp
 
 def ReturnUfloat(string):
     """
-    string has format   238.023249814(23)
+    string has format   238.023249814(23) 
+            or format   [15.99903-15.99977]
+
     Returns a uncertain number so python can do calculations
     """
     Number=str(string.split('(')[0])
@@ -97,6 +100,90 @@ def FindAtomicMass(df,proton,Isotope):
     Mass=ReturnUfloat(Mass)
     return(Mass)
 
+def CheckInParen(i,ChemicalFormula):
+    """
+    i = index inside the string 'ChemicalFormula
+    ChemicalFormula = string that could potentially have ()
+
+    Please note, this code is not complete
+    """
+    NumberOpenParen=ChemicalFormula.count("(")
+    NumberCloseParen=ChemicalFormula.count(")")
+    if NumberOpenParen != NumberCloseParen:
+        print("Unbalanced parentheses in chemical formula")
+        quit()
+    if NumberOpenParen==0:
+        return(1,False)
+    
+    print("Hello")
+    Mul=4
+    Test=True
+    return(Mul,Test)
+
+def ChemList(ChemicalFormula):
+    """
+    This function will take in a string for a 
+    chemical formula.
+
+    Please modify your formula to fit the following rules
+    
+    1. No repeats of elements (sum up all the same time element)
+    2. To enter a subscript use "_", for example He_3 indicates
+       three helium atoms.
+    3. Use captical letters for the first letter of an element.
+       If there are multiple letters for an elemental symbol,
+       then use lowercase for the second letter (program does
+       not interpret three symbol elements)
+    4. If there are more than 999 of a single atom in your chemical
+       formula, you will have to write your own code. Or modify 
+       this one.
+    """
+    i=0
+    List=[]
+    while (i <len(ChemicalFormula)-1):
+        start=i
+        #print("The beginning i index = "+str(i))
+        if re.search('[A-Z]',ChemicalFormula[i]):               #Capital letter?
+            if re.search('[a-z]',ChemicalFormula[i+1]):         #Followed by lowercase?
+                if re.search('_',ChemicalFormula[i+2]):         #Followed by more than 1?
+                    if re.search('[0-9]',ChemicalFormula[i+5]): #Hundreds check
+                        List=np.append(List,ChemicalFormula[i:i+6])
+                        #print(ChemicalFormula[i:i+6])
+                        i=i+6
+                    elif re.search('[0-9]',ChemicalFormula[i+4]): #tens check
+                        List=np.append(List,ChemicalFormula[i:i+5])
+                        #print(ChemicalFormula[i:i+5])
+                        i=i+5
+                    else:                                        #If not hundres or tens, then ones
+                        List=np.append(List,ChemicalFormula[i:i+4])
+                        #print(ChemicalFormula[i:i+4])
+                        i=i+4
+                else:                                           #If not more than one, print
+                    List=np.append(List,ChemicalFormula[i:i+2])
+                    #print(ChemicalFormula[i:i+2])
+                    i=i+2
+            elif re.search('_',ChemicalFormula[i+1]):           #If only single symbol, then do same as above
+                if re.search('[0-9]',ChemicalFormula[i+4]):     #hundreds
+                    List=np.append(List,ChemicalFormula[i:i+5])
+                    #print(ChemicalFormula[i:i+5])
+                    i=i+5
+                elif re.search('[0-9]',ChemicalFormula[i+3]):   #tens
+                    List=np.append(List,ChemicalFormula[i:i+4])
+                    #print(ChemicalFormula[i:i+4])
+                    i=i+4
+                else:                                           #ones
+                    List=np.append(List,ChemicalFormula[i:i+3])
+                    #print(ChemicalFormula[i:i+3])
+                    i=i+3
+            else:
+                List=np.append(List,ChemicalFormula[i])
+                print(ChemicalFormula[i])
+                i=i+1
+        if start==i: #If we didn't find anything useful
+            i=i+1
+        #print("The end i index = "+str(i))
+    return(List)
+
 def StringToMass(string):
     """
     This function takes in a string of the form
@@ -119,8 +206,8 @@ def StringToMass(string):
         Zaid[i]=int(ListOfString[i*3])
 
 
-        df = pd.read_csv('../Data/AtomicWeights.csv')
-        #Gather Mass Data
+    df = pd.read_csv('../Data/AtomicWeights.csv')
+    #Gather Mass Data
     for i in range(0,len(Zaid)):
         sZaid=str(Zaid[i])
         if len(sZaid)==4:
@@ -186,37 +273,3 @@ def ConvertFractions(string,Mass,MasstoAtom,Zaid):
 
     return(stringCalculated)
 
-
-################################################################
-########################## Input ###############################
-################################################################
-
-# #ZAID fraction Error
-# string='92235 0.285714286 0 92238 0.714285714 0'
-# #string='92235 0.288310115 0 92238 0.711689885 0' #False
-
-# MasstoAtom=True
-
-# ################################################################
-# ####################### Gather Data ############################
-# ################################################################
-
-# Mass,Zaid=StringToMass(string)
-
-# ################################################################
-# ###################### Calculation #############################
-# ################################################################
-
-# stringCalculated=ConvertFractions(string,Mass,MasstoAtom,Zaid)
-
-
-# if MasstoAtom:
-#     print("Mass Fractions:")
-#     print(string)
-#     print("Atom Fractions:")
-#     print(stringCalculated)
-# else:
-#     print("Mass Fractions:")
-#     print(stringCalculated)
-#     print("Atom Fractions:")
-#     print(string)
