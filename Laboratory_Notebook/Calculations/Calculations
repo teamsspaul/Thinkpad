@@ -64,7 +64,7 @@ stringCalculated=fun.ConvertFractions(string,Mass,MasstoAtom,Zaid)
 
 #Make sure your chemical form has no repeats
 #And no parentheses
-ChemicalFormula='U_2Na_2O'
+ChemicalFormula='HNO_3'
 ChemicalFormulaError=[0,0,0,0,0,0,0] #+/- error in integers of
                                      #chemical formula
 ChemicalFormula=ChemicalFormula+"    "
@@ -88,19 +88,32 @@ MolarMass=fun.DetermineMolarMass(List,df,
 # print(MolarMass)
 
 #######################################################
-########### Calculate molality/molarity ###############
+############# Convert molality/molarity ###############
 #######################################################
 
 MolarityToMolality=False
-quit()
+
 
 ##################################################
 ################### Gather Data ##################
 ##################################################
 
-gramsOmol=20.01
+gramsOmol=MolarMass
 #Density in grams per cc or grams per ml
 density=ufloat(1.101,0.02)
+
+dfDen=pd.read_csv('../Data/Nitric_Acid.csv')
+
+
+
+density=GetDensity(Temperature,WtConcentration)
+quit()
+print(dfDen)
+quit()
+
+
+
+
 Molality=ufloat(21.4,0.2) #HF
 
 Molarity=ufloat(16.5,0.1)
