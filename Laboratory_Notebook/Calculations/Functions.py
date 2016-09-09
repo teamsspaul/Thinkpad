@@ -440,3 +440,175 @@ def DetermineMolarMass(List,df,ModSymbols,
                 MolarMass=MolarMass+IndividualMolarMass*Multiplier
                 break
     return(MolarMass)
+
+def FindRange(List,Item):
+    """
+    This function returns a range...yup
+    """
+    for i in range(0,len(List)-1):
+        if List[i] == Item:
+            Range=[List[i]]
+            break
+        elif List[i+1] == Item:
+            Range=[List[i+1]]
+            break
+        elif List[i] <= Item <= List[i+1]:
+            Range=[List[i],List[i+1]]
+            break
+    return(Range)
+
+def FindInTable(List1,List2,ItemMatchWithList2):
+    """
+    This function needs two lists that are the same
+    length. and with data that corresponds to each other
+    searches through list2 to find the item,
+    then reports that same value from list1
+    """
+    for i in range(0,len(List2)):
+        if(ItemMatchWithList2==List2[i]):
+            return(List1[i])
+    
+def InterpolateDensity(dfDen,Temp,TRange,Conc,CRange):
+    """
+    This function interpolates stuff...don't ask me how
+    """
+    Concentrations=dfDen['Concentration_Percent_Weight']
+
+    for i in range(0,len(TRange)):
+        t=dfDen[str(int(TRange[i]))+'°C']
+        for j in range(0,len(CRange)):
+            C=CRange[j]
+            D=FindInTable(t,Concentrations,C)
+            try:
+                Densities=np.append(Densities,D)
+            except NameError:
+                Densities=[D]
+
+    if len(Densities)==4:
+        Q11=((TRange[1]-Temp)*(CRange[1]-Conc))/\
+            ((TRange[1]-TRange[0])*(CRange[1]-CRange[0]))
+        Q21=((Temp-TRange[0])*(CRange[1]-Conc))/\
+            ((TRange[1]-TRange[0])*(CRange[1]-CRange[0]))
+        Q12=((TRange[1]-Temp)*(Conc-CRange[0]))/\
+            ((TRange[1]-TRange[0])*(CRange[1]-CRange[0]))
+        Q22=((Temp-TRange[0])*(Conc-CRange[0]))/\
+            ((TRange[1]-TRange[0])*(CRange[1]-CRange[0]))
+
+        density=Q11*Densities[0]+Q12*Densities[1]+\
+                Q21*Densities[2]+Q22*Densities[3]
+        
+    if len(Densities)==1:
+        density=Densities[0]
+
+    if len(Densities)==2:
+        if len(TRange)==2:
+            density=((Temp-TRange[0])*(Densities[1]-Densities[0]))/\
+                    (TRange[1]-TRange[0])+Densities[0]
+        if len(CRange)==2:
+            density=((Conc-CRange[0])*(Densities[1]-Densities[0]))/\
+                    (CRange[1]-CRange[0])+Densities[0]
+        
+    #print(density)
+    #print(Temp)
+    #print(Conc)
+    return(density)
+
+def GetDensity(Temperature,WtConcentration,dfDen):
+    """
+    This function gets you density, don't ask me how
+    """
+    MinTemp=Temperature.nominal_value-Temperature.std_dev
+    MaxTemp=Temperature.nominal_value+Temperature.std_dev
+    MinWtCon=WtConcentration.nominal_value-WtConcentration.std_dev
+    MaxWtCon=WtConcentration.nominal_value+WtConcentration.std_dev
+
+    Columns=list(dfDen.columns.values)
+
+    #Find all the temperatures
+    for i in range(0,len(Columns)):
+        if ('°C' in Columns[i]):
+            Temp=float(Columns[i].split("°C")[0])
+            try:
+                TempsAva=np.append(TempsAva,Temp)
+            except NameError:
+                TempsAva=Temp
+       
+    #Find the temperatures you fit between
+    MinTempRange=FindRange(TempsAva,MinTemp)
+    MaxTempRange=FindRange(TempsAva,MaxTemp)
+    
+    #Find all the concentrations
+    for i in range(0,len(dfDen.Concentration_Percent_Weight)):
+        StrCon=float(dfDen.Concentration_Percent_Weight[i])
+        try:
+            Concentration=np.append(Concentration,StrCon)
+        except NameError:
+            Concentration=StrCon
+            
+    #Find concentrations you fit between
+    MinConRange=FindRange(Concentration,MinWtCon)
+    MaxConRange=FindRange(Concentration,MaxWtCon)
+    
+    density=InterpolateDensity(dfDen,
+                               MinTemp,
+                               MinTempRange,
+                               MinWtCon,
+                               MinConRange)
+    
+    density=np.append(density,InterpolateDensity(dfDen,
+                                                 MinTemp,
+                                                 MinTempRange,
+                                                 MaxWtCon,
+                                                 MaxConRange))
+
+    density=np.append(density,InterpolateDensity(dfDen,
+                                                 MaxTemp,
+                                                 MaxTempRange,
+                                                 MinWtCon,
+                                                 MinConRange))
+    
+    density=np.append(density,InterpolateDensity(dfDen,
+                                                 MaxTemp,
+                                                 MaxTempRange,
+                                                 MaxWtCon,
+                                                 MaxConRange))
+    
+    densityN=(max(density)+min(density))/2
+    densityE=densityN-min(density)
+    density=ufloat(densityN,densityE)
+    return(density)
+
+def ConvertMol(MolarityToMolality,First,
+               gramsOmol,dfDen,Temperature):
+    """
+    This function will convert molality to molarity
+    and viceversa
+    """
+    #First either equals Molarity or Molality
+    #Second either equals Molarity or Molality
+    if not MolarityToMolality:
+        WtConcentration=100/(1000/(First*gramsOmol)+1)
+    else:
+        WtConcentration=ufloat(30,0.1) #A Guess
+    
+    density=GetDensity(Temperature,WtConcentration,dfDen)
+
+    ##################################################
+    ################## Calculation ###################
+    ##################################################
+
+    if MolarityToMolality:
+        #(mols/kg)
+        dif=1
+        while (abs(dif)>0.001):
+            NewSecond=1/(density/First-gramsOmol*0.001)
+            WtConcentration=100/(1000/(NewSecond*gramsOmol)+1)
+            density=GetDensity(Temperature,WtConcentration,dfDen)
+            Second=1/(density/First-gramsOmol*0.001)
+            dif=Second-NewSecond
+    else:
+        #(mols/L)
+        Second=density/(1/First+gramsOmol*0.001)
+
+    return(Second)
+    
