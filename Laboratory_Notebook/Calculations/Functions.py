@@ -39,17 +39,27 @@ def ReturnUfloat(string):
     """
     string has format   238.023249814(23) 
             or format   [15.99903-15.99977]
+            or format   235.04+/-0.0000019
 
     Returns a uncertain number so python can do calculations
     """
-    Number=str(string.split('(')[0])
-    LastErrorNumber=str(string.split("(")[1].replace(")",""))
-    NumberOfZeros=len(Number.split(".")[1])-len(LastErrorNumber)
-    Error="0."
-    for i in range(0,NumberOfZeros):
-        Error=Error+"0"
-    Error=Error+LastErrorNumber
-
+    if "(" in string:
+        Number=str(string.split('(')[0])
+        LastErrorNumber=str(string.split("(")[1].replace(")",""))
+        NumberOfZeros=len(Number.split(".")[1])-len(LastErrorNumber)
+        Error="0."
+        for i in range(0,NumberOfZeros):
+            Error=Error+"0"
+        Error=Error+LastErrorNumber
+    elif "[" in string:
+        FirstNum=float(string.split('-')[0].replace("[",''))
+        SecondNum=float(string.split('-')[1].replace(']',''))
+        Number=str((FirstNum+SecondNum)/2)
+        Error=str(float(Number)-FirstNum)
+    elif "+/-" in string:
+        Number=string.split("+/-")[0]
+        Error=string.split("+/-")[1]
+        
     return(ufloat(float(Number),float(Error)))
     
 def FindAtomicMass(df,proton,Isotope):
@@ -177,7 +187,7 @@ def ChemList(ChemicalFormula):
                     i=i+3
             else:
                 List=np.append(List,ChemicalFormula[i])
-                print(ChemicalFormula[i])
+                #print(ChemicalFormula[i])
                 i=i+1
         if start==i: #If we didn't find anything useful
             i=i+1
@@ -237,6 +247,66 @@ def StringToMass(string):
 
     return(Mass,Zaid)
 
+def StringToMass2(string):
+    """
+    This function takes in a string of the form
+    zaid fraction error zaid fraction error ...
+    will read a file called 'AtomicWeights.csv'
+    and find the atomic weight with error of the zaids
+    and store those value in a list called Mass
+    """
+    ListOfString=string.split()
+
+    if not len(ListOfString)%3==0:
+        print("Check string variable missing fraction or error")
+        quit()
+
+    #Initialize fractions and zaid
+    Zaid=0*np.arange(0,int(len(ListOfString)/3))
+    
+    #Gather fraction data and zaid data
+    for i in range(0,int(len(ListOfString)/3)):
+        Zaid[i]=int(ListOfString[i*3])
+        floatednumber=ufloat(float(ListOfString[i*3+1]),
+                             float(ListOfString[i*3+2]))
+        try:
+            AtomFractions=np.append(AtomFractions,floatednumber)
+        except NameError:
+            AtomFractions=floatednumber
+
+    df = pd.read_csv('../Data/AtomicWeights.csv')
+    #Gather Mass Data
+    for i in range(0,len(Zaid)):
+        sZaid=str(Zaid[i])
+        if len(sZaid)==4:
+            proton=sZaid[0:2]
+            if sZaid[2]=="0":
+                Isotope=sZaid[3]
+            else:
+                Isotope=sZaid[2:4]
+        elif len(sZaid)==5:
+            proton=sZaid[0:2]
+            if sZaid[2]=="0":
+                Isotope=sZaid[3:5]
+            if sZaid[3]=="0":
+                Isotope=sZaid[4:5]
+            if sZaid[2]!="0" and sZaid[3]!="0":
+                Isotope=sZaid[2:5]
+        elif len(sZaid)==6:
+            proton=sZaid[0:3]
+            Isotope=sZaid[3:6]
+        else:
+            print("Length of zaid is not 4 5 or 6 err")
+            quit()
+        try:
+            Mass=np.append(Mass,FindAtomicMass(df,proton,Isotope))
+            protons=np.append(protons,proton)
+        except NameError:
+            Mass=FindAtomicMass(df,proton,Isotope)
+            protons=proton
+            
+    return(Mass,protons,AtomFractions)
+
 def ConvertFractions(string,Mass,MasstoAtom,Zaid):
     """
     This function will convert, with error, the mass or atom fraction
@@ -273,3 +343,100 @@ def ConvertFractions(string,Mass,MasstoAtom,Zaid):
 
     return(stringCalculated)
 
+
+def FindSymbol(NumofProtons,df):
+    """
+    This function will find the element symbol, based on number of
+    protons.
+    """
+    for i in range(0,len(df.Protons)):
+        if str(df.Protons[i])==NumofProtons:
+            Symbol=df.Symbol[i]
+            break
+        
+    try:
+        Symbol
+    except NameError:
+        print("Could not find Symbol for Modfication zaid")
+        quit()
+
+    return(Symbol)
+
+def FormatMods(Modifications,df):
+    """
+    This functions formats modifications
+
+    """
+    for i in range(0,len(Modifications)):
+        Modifications[i]=Modifications[i].replace('+/-',' ')
+    
+        Mass,protons,AtomFractions=StringToMass2(Modifications[i])
+        Mass=" ".join(str(i) for i in Mass)
+        protons=" ".join(str(i) for i in protons)
+        LAtomFractions=" ".join(str(i) for i in AtomFractions)
+        try:
+            ModMass=np.append(ModMass,Mass)
+            Modprotons=np.append(Modprotons,protons)
+            ModAFrac=np.append(ModAFrac,LAtomFractions)
+        except NameError:
+            ModMass=[Mass]
+            Modprotons=[protons]
+            ModAFrac=[LAtomFractions]
+
+    
+    for i in range(0,len(Modifications)):
+        proton=Modprotons[i].split(" ")[0]
+        symbol=FindSymbol(proton,df)
+        try:
+            ModSymbols=np.append(ModSymbols,symbol)
+        except NameError:
+            ModSymbols=symbol
+
+    return(ModMass,ModSymbols,ModAFrac)
+
+def DetermineMolarMass(List,df,ModSymbols,
+                       ModMass,AtomFractions,
+                       ChemicalFormulaError):
+    """
+    this function determines the molar mass of a chemical formula
+    with error:
+    List is a list of the chemical formula
+    df is a dataframe with atomic mass information
+    ModSymbols are the modificaiton symbols (if using different Dudes
+    AtomFractions are the atom fractions of the different dudes
+    ChemicalFormulaError is the error in the number of each atom in the
+    chemical formula, for example UO_2 could have a chemical formula
+    ChemicalFormulaError=[0,0.001], meaning that a very small amount of
+    the time, we have UO_3...this isn't the best way of doing this...
+    """
+    MolarMass=ufloat(0,0)
+    for i in range(0,len(List)):
+        Symbol=List[i].split("_")[0]
+        try:
+            Multiplier=List[i].split("_")[1]
+        except IndexError:
+            Multiplier=1
+        Multiplier=ufloat(Multiplier,ChemicalFormulaError[i])
+        for j in range(0,len(df.Symbol)):
+            if Symbol==str(df.Symbol[j]):
+                ModifyElement=False
+                for k in range(0,len(ModSymbols)):
+                    if ModSymbols[k]==Symbol: #We are modifying
+                        ModifyElement=True
+                        Masses=ModMass[k].split(" ")
+                        AFractions=AtomFractions[k].split(" ")
+                        IndividualMolarMass=0
+                        for l in range(0,len(Masses)):
+                            IndividualMolarMass=IndividualMolarMass+\
+                                       ReturnUfloat(Masses[l])*\
+                                       ReturnUfloat(AFractions[l])
+                if not ModifyElement:
+                    IndividualMolarMass=ReturnUfloat(
+                                            df.Standard_Atomic_Weight[j]
+                                                    )
+                # print(Symbol+" "+
+                #       str(IndividualMolarMass)
+                #      )
+                MolarMass=MolarMass+IndividualMolarMass*Multiplier
+                break
+    return(MolarMass)

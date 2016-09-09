@@ -46,50 +46,46 @@ MasstoAtom=True
 Mass,Zaid=fun.StringToMass(string)
 stringCalculated=fun.ConvertFractions(string,Mass,MasstoAtom,Zaid)
 
-if MasstoAtom:
-    print("Mass Fractions:")
-    print(string)
-    print("Atom Fractions:")
-    print(stringCalculated)
-else:
-    print("Mass Fractions:")
-    print(stringCalculated)
-    print("Atom Fractions:")
-    print(string)
+# if MasstoAtom:
+#     print("Mass Fractions:")
+#     print(string)
+#     print("Atom Fractions:")
+#     print(stringCalculated)
+# else:
+#     print("Mass Fractions:")
+#     print(stringCalculated)
+#     print("Atom Fractions:")
+#     print(string)
 
 #######################################################
 ############ Calculate grams per mol of ###############
 ############    a chemical formula      ###############
 #######################################################
 
-ChemicalFormula='He_800O_2Na_1'
-ChemicalFormula=ChemicalFormula+"    "
-
 #Make sure your chemical form has no repeats
 #And no parentheses
+ChemicalFormula='U_2Na_2O'
+ChemicalFormulaError=[0,0,0,0,0,0,0] #+/- error in integers of
+                                     #chemical formula
+ChemicalFormula=ChemicalFormula+"    "
 List=fun.ChemList(ChemicalFormula)
 
-
+#Enter Modifications:
+#1. Each element should be a single item in the list
+#2. Format: zaid atomfraction+/-error zaid atomfraction+/-error
+#   or    : zaid atomfraction error zaid atomfraction
+Modifications=['92235 0.2883155436+/-0.0000000024 92238 0.7116844564+/-0.0000000024',stringCalculated]
 
 df = pd.read_csv('../Data/AtomicWeights.csv')
 
-for i in range(0,len(List)):
-    Symbol=List[i].split("_")[0]
-    Multiplier=List[i].split("_")[1]
-    for j in range(0,len(df.Symbol)):
-        if Symbol==str(df.Symbol[j]):
-            print(Symbol+" "+str(df.Standard_Atomic_Weight[j]))
-            break
+
+ModMass,ModSymbols,AtomFractions=fun.FormatMods(Modifications,df)
+MolarMass=fun.DetermineMolarMass(List,df,
+                                 ModSymbols,ModMass,
+                                 AtomFractions,ChemicalFormulaError)
 
 
-
-#find atom fractions of elements
-
-
-
-
-
-
+print(MolarMass)
 
 
 
