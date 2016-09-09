@@ -589,8 +589,14 @@ def ConvertMol(MolarityToMolality,First,
     if not MolarityToMolality:
         WtConcentration=100/(1000/(First*gramsOmol)+1)
     else:
+        dif=1
         WtConcentration=ufloat(30,0.1) #A Guess
-    
+        while( abs(dif)>0.001):
+            OldWt=WtConcentration
+            density=GetDensity(Temperature,OldWt,dfDen)
+            WtConcentration=(100*gramsOmol*First)/(1000*density)
+            dif=(WtConcentration-OldWt)/WtConcentration
+            
     density=GetDensity(Temperature,WtConcentration,dfDen)
 
     ##################################################
@@ -599,13 +605,14 @@ def ConvertMol(MolarityToMolality,First,
 
     if MolarityToMolality:
         #(mols/kg)
-        dif=1
-        while (abs(dif)>0.001):
-            NewSecond=1/(density/First-gramsOmol*0.001)
-            WtConcentration=100/(1000/(NewSecond*gramsOmol)+1)
-            density=GetDensity(Temperature,WtConcentration,dfDen)
-            Second=1/(density/First-gramsOmol*0.001)
-            dif=Second-NewSecond
+        #dif=1
+        #while (abs(dif)>0.001):
+            #NewSecond=1/(density/First-gramsOmol*0.001)
+            #WtConcentration=100/(1000/(NewSecond*gramsOmol)+1)
+            #density=GetDensity(Temperature,WtConcentration,dfDen)
+            #Second=1/(density/First-gramsOmol*0.001)
+            #dif=Second-NewSecond
+        Second=1/(density/First-gramsOmol*0.001)
     else:
         #(mols/L)
         Second=density/(1/First+gramsOmol*0.001)

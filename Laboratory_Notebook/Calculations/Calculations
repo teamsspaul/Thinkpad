@@ -125,6 +125,12 @@ print("Molarity = "+str(Molarity))
 print("Molality = "+str(Molality))
 
 
+#######################################################
+############# Calculate New 
+#######################################################
+
+
+
 ###################### Time To execute #################
 
 print("--- %s seconds ---" % (time.time() - start_time))
