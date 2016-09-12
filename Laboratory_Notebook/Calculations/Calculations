@@ -121,14 +121,32 @@ else:
                             gramsOmol,dfDen,Temperature)
     
 
-print("Molarity = "+str(Molarity))
-print("Molality = "+str(Molality))
+#print("Molarity = "+str(Molarity))
+#print("Molality = "+str(Molality))
 
 
 #######################################################
-############# Calculate New 
+############# Calculate New Concentration #############
 #######################################################
 
+Vol1=1
+Vol2=1
+
+gramsOmol=gramsOmol
+
+m1=Molality
+m2=Molality*.25
+
+Temperature=ufloat(20,3)
+
+dfDen=pd.read_csv('../Data/Nitric_Acid.csv')
+
+m3,p3,Vol3,Wt,M3=fun.NewConcentration(m1,m2,gramsOmol,
+                                Temperature,dfDen,
+                                Vol1,Vol2)
+
+M1=fun.ConvertMol(False,m1,gramsOmol,dfDen,Temperature)
+M2=fun.ConvertMol(False,m2,gramsOmol,dfDen,Temperature)
 
 
 ###################### Time To execute #################

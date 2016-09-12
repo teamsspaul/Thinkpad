@@ -619,3 +619,40 @@ def ConvertMol(MolarityToMolality,First,
 
     return(Second)
     
+def NewConcentration(m1,m2,gramsOmol,
+                     Temperature,dfDen,
+                     Vol1,Vol2):
+    """
+    This function calculates a new concentration when
+    two volumes of the same substance are added together
+    same temperature, assuming that both solutions
+    have had time to cool
+    """
+
+    WtConcentration1=100/(1000/(m1*gramsOmol)+1)
+    WtConcentration2=100/(1000/(m2*gramsOmol)+1)
+
+    p1=GetDensity(Temperature,WtConcentration1,dfDen)
+    p2=GetDensity(Temperature,WtConcentration2,dfDen)
+
+    molsV1=(m1*gramsOmol*p1*Vol1)/(1000*gramsOmol+m1*(gramsOmol**2))
+    molsV2=(m2*gramsOmol*p2*Vol2)/(1000*gramsOmol+m2*(gramsOmol**2))
+
+    #kgSol1=(1000*p1*Vol1)/(1000+m1*gramsOmol)/1000
+    #kgSol2=(1000*p2*Vol2)/(1000+m2*gramsOmol)/1000
+
+    kgSol1=(1-WtConcentration1/100)*(p1*Vol1)/(1000)
+    kgSol2=(1-WtConcentration2/100)*(p2*Vol2)/(1000)
+    
+    Totmols=molsV1+molsV2
+    Totkg=kgSol1+kgSol2
+
+    m3=Totmols/Totkg
+    WtConcentration3=100/(1000/(m3*gramsOmol)+1)
+    #Assuming its had time to cool down
+    p3=GetDensity(Temperature,WtConcentration3,dfDen)
+    Vol3=(p1*Vol1+p2*Vol2)/p3
+
+    Molarity=ConvertMol(False,m3,gramsOmol,dfDen,Temperature)
+    
+    return(m3,p3,Vol3,WtConcentration3,Molarity)
