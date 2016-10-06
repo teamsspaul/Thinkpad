@@ -11,5 +11,7 @@ sudo apt-get upgrade  #Upgrades installs
    81  tlmgr install sectsty                                                            #Finally Installed latex package
 
 
+tlmgr option repository ftp://tug.org/historic/systems/texlive/2015/tlnet-final
+
 tlmgr update <package name>   #update package
 tlmgr update --self --all     #update all packages

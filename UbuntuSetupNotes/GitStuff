@@ -1,0 +1,4 @@
+Sometimes, If you, have 403 error for pushing.
+edit .git/config
+the line: url = ....
+try and add USERNAME@github.com/     ...blah blahh

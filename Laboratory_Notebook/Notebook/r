@@ -1,0 +1,2 @@
+pdflatex lab_book_1.tex
+firefox lab_book_1.pdf#page=$1

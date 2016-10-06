@@ -1,0 +1,39 @@
+% +--------------------------------------------------------------------+
+% | Copyright Page
+% +--------------------------------------------------------------------+
+
+\newpage
+
+\thispagestyle{empty}
+
+\vspace*{0.9cm}
+
+\begin{center}
+
+{\bf \Huge Copyright}
+
+\vspace{1cm}
+
+% +--------------------------------------------------------------------+
+% | On the line below, replace "Enter Your Name" with your name
+% | Use the same form of your name as it appears on your title page.
+% | Use mixed case, for example, Barack Obama.
+% +--------------------------------------------------------------------+
+
+   \Large Enter Your Name\\
+
+   \vspace{0.5cm}
+
+% +--------------------------------------------------------------------+
+% | On the line below, replace "Graduation Year" with the four-digit year
+% | of your graduation. For example:
+% |
+% |     2016
+% |
+% +--------------------------------------------------------------------+
+
+   Graduation Year\\
+
+   \vspace{0.5cm}
+
+\end{center}
