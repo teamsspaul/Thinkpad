@@ -524,6 +524,7 @@ def GetDensity(Temperature,WtConcentration,dfDen):
 
     Columns=list(dfDen.columns.values)
 
+    
     #Find all the temperatures
     for i in range(0,len(Columns)):
         if ('°C' in Columns[i]):
@@ -532,7 +533,7 @@ def GetDensity(Temperature,WtConcentration,dfDen):
                 TempsAva=np.append(TempsAva,Temp)
             except NameError:
                 TempsAva=Temp
-       
+                
     #Find the temperatures you fit between
     MinTempRange=FindRange(TempsAva,MinTemp)
     MaxTempRange=FindRange(TempsAva,MaxTemp)
@@ -544,10 +545,11 @@ def GetDensity(Temperature,WtConcentration,dfDen):
             Concentration=np.append(Concentration,StrCon)
         except NameError:
             Concentration=StrCon
-            
+
     #Find concentrations you fit between
     MinConRange=FindRange(Concentration,MinWtCon)
     MaxConRange=FindRange(Concentration,MaxWtCon)
+
     
     density=InterpolateDensity(dfDen,
                                MinTemp,
@@ -587,15 +589,21 @@ def ConvertMol(MolarityToMolality,First,
     #First either equals Molarity or Molality
     #Second either equals Molarity or Molality
     if not MolarityToMolality:
-        WtConcentration=100/(1000/(First*gramsOmol)+1)
+        if First==0:
+            WtConcentration=ufloat(0,0)
+        else:
+            WtConcentration=100/(1000/(First*gramsOmol)+1)
     else:
-        dif=1
-        WtConcentration=ufloat(30,0.1) #A Guess
-        while( abs(dif)>0.001):
-            OldWt=WtConcentration
-            density=GetDensity(Temperature,OldWt,dfDen)
-            WtConcentration=(100*gramsOmol*First)/(1000*density)
-            dif=(WtConcentration-OldWt)/WtConcentration
+        if First==0:
+            WtConcentration=ufloat(0,0)
+        else:
+            dif=1
+            WtConcentration=ufloat(30,0.1) #A Guess
+            while( abs(dif)>0.001):
+                OldWt=WtConcentration
+                density=GetDensity(Temperature,OldWt,dfDen)
+                WtConcentration=(100*gramsOmol*First)/(1000*density)
+                dif=(WtConcentration-OldWt)/WtConcentration
             
     density=GetDensity(Temperature,WtConcentration,dfDen)
 
@@ -612,10 +620,16 @@ def ConvertMol(MolarityToMolality,First,
             #density=GetDensity(Temperature,WtConcentration,dfDen)
             #Second=1/(density/First-gramsOmol*0.001)
             #dif=Second-NewSecond
-        Second=1/(density/First-gramsOmol*0.001)
+        if First==0:
+            Second=0
+        else:
+            Second=1/(density/First-gramsOmol*0.001)
     else:
+        if First==0:
+            Second=0
+        else:
         #(mols/L)
-        Second=density/(1/First+gramsOmol*0.001)
+            Second=density/(1/First+gramsOmol*0.001)
 
     return(Second)
     
@@ -628,9 +642,15 @@ def NewConcentration(m1,m2,gramsOmol,
     same temperature, assuming that both solutions
     have had time to cool
     """
-
-    WtConcentration1=100/(1000/(m1*gramsOmol)+1)
-    WtConcentration2=100/(1000/(m2*gramsOmol)+1)
+    if m1==0:
+        WtConcentration1=ufloat(0,0)
+    else:
+        WtConcentration1=100/(1000/(m1*gramsOmol)+1)
+    if m2==0:
+        WtConcentration2=ufloat(0,0)
+    else:   
+        WtConcentration2=100/(1000/(m2*gramsOmol)+1)
+    
 
     p1=GetDensity(Temperature,WtConcentration1,dfDen)
     p2=GetDensity(Temperature,WtConcentration2,dfDen)
@@ -656,3 +676,11 @@ def NewConcentration(m1,m2,gramsOmol,
     Molarity=ConvertMol(False,m3,gramsOmol,dfDen,Temperature)
     
     return(m3,p3,Vol3,WtConcentration3,Molarity)
+
+def GetWt(m,gramsOmol):
+    if(m==0):
+        WtConcentration=ufloat(0,0)
+    else:
+        WtConcentration=100/(1000/(m*gramsOmol)+1)
+
+    return(WtConcentration)
