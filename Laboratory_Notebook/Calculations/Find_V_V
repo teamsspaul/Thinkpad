@@ -82,10 +82,10 @@ Vol1=(b1-B*Vol2)/A
 
 #print(M3,Vol3)
 
-print("Combine "+str(Vol1)+"ml of "+str(M1)+\
-      "M solution with "+str(Vol2)+\
-      "ml of "+str(M2)+"M solution, to get "+str(Vol3)+"ml of "+\
-      str(M3)+"M solution")
+print("Combine "+str(Vol1)+" ml of "+str(M1)+\
+      " M solution with "+str(Vol2)+\
+      " ml of "+str(M2)+" M solution, to get "+str(Vol3)+" ml of "+\
+      str(M3)+" M solution")
 
 
 ###################### Time To execute #################

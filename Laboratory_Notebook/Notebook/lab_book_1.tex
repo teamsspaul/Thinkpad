@@ -56,9 +56,23 @@
 \usepackage{float} % Required for specifying the exact location of a figure or table
 \usepackage{graphicx} % Required for including images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{mathrsfs}
+\usepackage{amsmath}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Command to make the lines in the title page
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+  \hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+\newcommand{\tss}{\textsuperscript}
+\newcommand{\tsbs}{\textsubscript}
 
 %---------------------------------------------------------------------
 %	DEFINITION OF EXPERIMENTS
@@ -70,7 +84,6 @@
 %\newexperiment{shorthand}{Description of the experiment}
 
 %----------------------------------------------------------------------
-
 \begin{document}
 
 %----------------------------------------------------------------------
@@ -96,21 +109,20 @@
 %------------------------------------------------------------------------
 %	LAB BOOK CONTENTS
 %------------------------------------------------------------------------
-% Blank template to use for new days:
-%\labday{Day, Date Month Year}
-%\experiment{}
-%Text
-%-----------------------------------------
-%\experiment{}
-%Text
-%------------------------------------------------------------------------
 
-\labday{Thursday, 6 October 2016\\ 8:30am - 11:00 am\\ 1:30pm - 5:00pm}
+
+
+
+%------------------------------------------------------------------------
+%	LAB BOOK day
+%-----------------------------------------------------------------------
+
+\labday{Thursday, 6 October 2016\\ 8:30am - 11:00 am\\ 1:30pm - 5:30pm}
 
 \experiment{Notes}
 
 \begin{itemize}
-  \item{Project Number: 506370-000}
+  \item{Project Number: 504370-0001}
 \end{itemize}
 
 
@@ -126,16 +138,119 @@
 \item{Get alpha detector from Dr. Marianno}
 \item{Set up laboratory notebook}
 \item{Calculation}
-  \begin{equation*}
-
-  \end{equation*}
+  To do calculation to determine the volumes needed for a final
+  concentration of a particular volume, knowing the initial
+  concentrations
+  \begin{align*}
+    V_2&=\frac{b_2-\frac{M_1b_1}{A}}{M_2-\frac{M_1}{A}}\\
+    V_1&=\frac{b-BV_2}{A}
+  \end{align*}
+  Where:
+  \begin{align*}
+    A&=(1-wt\%_1)\rho_1\\
+    B&=(1-wt\%_2)\rho_2\\
+    b_1&=(1-wt\%_3)V_3\rho_3\\
+    b_2&=M_3V_3
+  \end{align*}
+  With known Molarity and volume of a solution
+  how much, and of what concentration
+  do we need to combine with a second solution
+  to get a final solution of known concentration
+  and volume?
+  \begin{align*}
+    B&=(1-wt\%_3)V_3\rho_3-(1-wt\%_1)V_1\rho_!\\
+    A&=M_3V_3-M_1V_1\\
+    C&=\frac{B}{A}=\frac{(1-wt\%_2)\rho_2}{M_2}
+  \end{align*}
+  Need iterative solution, choose:
+  \begin{align*}
+    M_2&=\frac{M_3V_3-M_1V_1}{V_3-V_1}\\
+    V_2&=V_3-V_1
+  \end{align*}
+  Use to determine molality $\rightarrow$ $wt\%_2$ $\rightarrow$
+  $\rho_2$. Then compare to $C$, iterate around the solution to
+  find answer so that $C=\frac{(1-wt\%_2)\rho_2)}{M_2}$.
 \end{itemize}
+
+
+
+%------------------------------------------------------------------------
+%	LAB BOOK day
+%-----------------------------------------------------------------------
+
+\labday{Friday, 7 October 2016\\ 9:00am - 12:00 am\\ 1:00pm - 5:00pm}
+
+\experiment{Stock} % 
+
+\begin{todolist}
+\item[\done]{Program calculation for creation of stock}
+\item{-}
+\end{todolist}
+\begin{center}
+    0.149+/-0.011 ml of 15.43+/-0.06 M HNO\tsbs{3} solution\\
+    +\\
+    1.91+/-0.08  ml of 0.0+/-0 M solution\\
+    = \\
+    2.048+/-0.026 ml of 1.12+/-0.08 M HNO\tsbs{3}
+  solution $\boxed{\rightarrow Stock}$ (glass container)
+\end{center}
+\begin{todolist}
+\item{-}
+\end{todolist}
+\begin{center}
+Combine 0.500+/-0.005 ml of 15.43+/-0.06 M HNO\tsbs{3}
+solution $\boxed{closet}$\\
++\\
+2.048+/-0.026 ml of 1.12+/-0.08 M HNO\tsbs{3} solution
+$\boxed{Stock}$
+\\
+=\\
+2.500+/-0.025 ml of 4.00+/-0.05 M HNO\tsbs{3} solution.
+$\boxed{\rightarrow Stock}$
+\end{center}
+
+\begin{todolist}
+\item{Put Source back in rad closet}
+\item{Remove 0.3 ml from $\boxed{ Stock}$ to $\boxed{1}$ count
+      on HPGe 30 minutes}
+\end{todolist}
+
+
 
 %----------------------------------------------------------------------
 %	Examples
 %-----------------------------------------------------------------------
+%---------------------------------------
+% Blank template to use for new days:
+%---------------------------------------
+%\labday{Day, Date Month Year}
+%\experiment{}
+%Text
 
-\labday{} % We don't want a date here so we make the labday blank
+%---------------------------------------
+% To do list
+%---------------------------------------
+%% \begin{todolist}
+%% \item[\wontfix]{profit}
+%% \item[\done]{This is done}
+%% \item{This is not done}
+%% \end{todolist}
+
+%---------------------------------------
+% Vial Step
+%---------------------------------------
+%% \begin{todolist}
+%% \item{-}
+%% \end{todolist}
+%% \begin{center}
+%% Vial 1\\
+%% +\\
+%% Vial 2\\
+%% =\\
+%% Final Vial
+%% \end{center}
+
+\labday{Example} % We don't want a date here so we make the labday blank
 
 \begin{center}
 \HRule \\[0.4cm]
@@ -199,3 +314,4 @@ Table \ref{tab:treatments_xy} shows that groups 1-3 reacted similarly to the two
 \bibliographystyle{plain} 
 
 \end{document}
+

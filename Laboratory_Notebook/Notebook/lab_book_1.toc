@@ -1,4 +1,7 @@
-\contentsline {chapter}{\nonumberline Thursday, 6 October 2016\\ 8:30am - 11:00 am\\ 1:30pm - 5:00pm}{1}{chapter*.2}
+\contentsline {chapter}{\nonumberline Thursday, 6 October 2016\\ 8:30am - 11:00 am\\ 1:30pm - 5:30pm}{1}{chapter*.2}
 \contentsline {experiment}{\numberline {1}Experiment Notes}{1}{experiment.1.1}
 \contentsline {experiment}{\numberline {2}Stock creation and count}{1}{experiment.1.2}
-\contentsline {experiment}{\numberline {1}This shows a sample table}{3}{experiment.2.1}
+\contentsline {chapter}{\nonumberline Friday, 7 October 2016\\ 9:00am - 12:00 am\\ 1:00pm - 5:00pm}{3}{chapter*.3}
+\contentsline {experiment}{\numberline {1}Stock creation and count}{3}{experiment.2.1}
+\contentsline {chapter}{\nonumberline Example}{4}{chapter*.4}
+\contentsline {experiment}{\numberline {1}This shows a sample table}{5}{experiment.3.1}

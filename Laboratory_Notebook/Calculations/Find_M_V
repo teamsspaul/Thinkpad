@@ -97,10 +97,10 @@ mc3,pc3,Vc3,Wtc3,Mc3=fun.NewConcentration(m1,m2,gramsOmol,
 #print(Mc3,Vc3)
 
 #Print out answer
-print("Combine "+str(Vol1)+"ml of "+str(M1)+\
-      "M solution with "+str(V2)+\
-      "ml of "+str(M2)+"M solution, to get "+str(Vol3)+"ml of "+\
-      str(M3)+"M solution")
+print("Combine "+str(Vol1)+" ml of "+str(M1)+\
+      " M solution with "+str(V2)+\
+      " ml of "+str(M2)+" M solution, to get "+str(Vol3)+" ml of "+\
+      str(M3)+" M solution")
 
 ###################### Time To execute #################
 
