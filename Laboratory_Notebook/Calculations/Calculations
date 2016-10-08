@@ -66,7 +66,7 @@ stringCalculated=fun.ConvertFractions(string,Mass,MasstoAtom,Zaid)
 
 #Make sure your chemical form has no repeats
 #And no parentheses
-ChemicalFormula='HNO_3'
+ChemicalFormula='FeH_4N_2O_6S_2'
 ChemicalFormulaError=[0,0,0,0,0,0,0] #+/- error in integers of
                                      #chemical formula
 ChemicalFormula=ChemicalFormula+"    "
@@ -86,7 +86,8 @@ MolarMass=fun.DetermineMolarMass(List,df,
                                  ModSymbols,ModMass,
                                  AtomFractions,ChemicalFormulaError)
 
-# print(MolarMass)
+print(MolarMass)
+quit()
 
 #######################################################
 ############### Calculate Molality from ###############

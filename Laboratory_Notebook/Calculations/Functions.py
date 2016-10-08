@@ -367,6 +367,11 @@ def FormatMods(Modifications,df):
     This functions formats modifications
 
     """
+    if(Modifications[0]==''):
+        ModMass=''
+        ModSymbols=''
+        ModAFrac=''
+        return(ModMass,ModSymbols,ModAFrac)
     for i in range(0,len(Modifications)):
         Modifications[i]=Modifications[i].replace('+/-',' ')
     
@@ -684,3 +689,48 @@ def GetWt(m,gramsOmol):
         WtConcentration=100/(1000/(m*gramsOmol)+1)
 
     return(WtConcentration)
+
+def WttoMolality(gramsOmol,wt):
+    """
+    wt needs to be in percent (40.26 not 0.4026)
+    """
+    m=1000/(gramsOmol*(100/wt-1))
+    return(m)
+
+def ConvertMolDenGiven(MolarityToMolality,First,
+                       gramsOmol,density):
+    """
+    This function will convert molality to molarity
+    and viceversa
+    """
+    #First either equals Molarity or Molality
+    #Second either equals Molarity or Molality
+    if not MolarityToMolality:
+        if First==0:
+            WtConcentration=ufloat(0,0)
+        else:
+            WtConcentration=100/(1000/(First*gramsOmol)+1)
+    else:
+        if First==0:
+            WtConcentration=ufloat(0,0)
+        else:
+            WtConcentration=(100*gramsOmol*First)/(1000*density)
+            
+
+    ##################################################
+    ################## Calculation ###################
+    ##################################################
+
+    if MolarityToMolality:
+        if First==0:
+            Second=0
+        else:
+            Second=1/(density/First-gramsOmol*0.001)
+    else:
+        if First==0:
+            Second=0
+        else:
+        #(mols/L)
+            Second=density/(1/First+gramsOmol*0.001)
+
+    return(Second)
