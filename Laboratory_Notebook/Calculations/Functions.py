@@ -524,9 +524,11 @@ def GetDensity(Temperature,WtConcentration,dfDen):
     """
     MinTemp=Temperature.nominal_value-Temperature.std_dev
     MaxTemp=Temperature.nominal_value+Temperature.std_dev
+    ActTemp=Temperature.nominal_value
     MinWtCon=WtConcentration.nominal_value-WtConcentration.std_dev
     MaxWtCon=WtConcentration.nominal_value+WtConcentration.std_dev
-
+    ActWtCon=WtConcentration.nominal_value
+    
     Columns=list(dfDen.columns.values)
 
     
@@ -542,6 +544,7 @@ def GetDensity(Temperature,WtConcentration,dfDen):
     #Find the temperatures you fit between
     MinTempRange=FindRange(TempsAva,MinTemp)
     MaxTempRange=FindRange(TempsAva,MaxTemp)
+    ActTempRange=FindRange(TempsAva,Temperature.nominal_value)
     
     #Find all the concentrations
     for i in range(0,len(dfDen.Concentration_Percent_Weight)):
@@ -554,13 +557,15 @@ def GetDensity(Temperature,WtConcentration,dfDen):
     #Find concentrations you fit between
     MinConRange=FindRange(Concentration,MinWtCon)
     MaxConRange=FindRange(Concentration,MaxWtCon)
-
+    ActConRange=FindRange(Concentration,
+                          WtConcentration.nominal_value)
     
     density=InterpolateDensity(dfDen,
                                MinTemp,
                                MinTempRange,
                                MinWtCon,
                                MinConRange)
+
     
     density=np.append(density,InterpolateDensity(dfDen,
                                                  MinTemp,
@@ -580,9 +585,14 @@ def GetDensity(Temperature,WtConcentration,dfDen):
                                                  MaxWtCon,
                                                  MaxConRange))
     
-    densityN=(max(density)+min(density))/2
-    densityE=densityN-min(density)
-    density=ufloat(densityN,densityE)
+    densityactual=InterpolateDensity(dfDen,ActTemp,ActTempRange,
+                                     ActWtCon,ActConRange)
+
+    
+    #densityN=(max(density)+min(density))/2
+    densityEL=densityactual-min(density)
+    densityEH=max(density)-densityactual
+    density=ufloat(densityactual,max([densityEL,densityEH]))
     return(density)
 
 def ConvertMol(MolarityToMolality,First,
