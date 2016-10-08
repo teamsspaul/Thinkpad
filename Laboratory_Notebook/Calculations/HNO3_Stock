@@ -94,6 +94,9 @@ print("Molality  : "+str(m))
 print("WtConcentr: "+str(WtConcentration))
 print("Molar Mass: "+str(MolarMass))
 print("Density   : "+str(density))
+print("pH        : "+str(-log(M,10)))
+
+#pH=14-pOH
 
 ###################### Time To execute #################
 

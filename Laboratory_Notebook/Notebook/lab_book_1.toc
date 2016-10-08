@@ -6,5 +6,5 @@
 \contentsline {experiment}{\numberline {2}Cycle 1 experiment}{4}{experiment.2.2}
 \contentsline {chapter}{\nonumberline Saturday, 8 October 2016\\ 10:00am - 5:00 pm}{5}{chapter*.4}
 \contentsline {experiment}{\numberline {1}Cycle 1 experiment}{5}{experiment.3.1}
-\contentsline {chapter}{\nonumberline Example}{6}{chapter*.5}
-\contentsline {experiment}{\numberline {1}This shows a sample table}{7}{experiment.4.1}
+\contentsline {chapter}{\nonumberline Example}{7}{chapter*.5}
+\contentsline {experiment}{\numberline {1}This shows a sample table}{8}{experiment.4.1}
