@@ -44,6 +44,8 @@ Temperature=ufloat(24.8,3)
 gramsOmol=ufloat(63.0130,0.0012)
 dfDen=pd.read_csv('../Data/Nitric_Acid.csv')
 
+PipettError=0.001 #Depends on volume preparing
+
 #M1=ufloat(15.43,0.06)
 M1=ufloat(15.35,0.13)
 m1=fun.ConvertMol(True,M1,gramsOmol,dfDen,Temperature)
@@ -51,9 +53,11 @@ m1=fun.ConvertMol(True,M1,gramsOmol,dfDen,Temperature)
 M2=ufloat(0,0)
 m2=ufloat(0,0)
 
-M3=ufloat(1.14,0.08)
+#M3=ufloat(1.14,0.08)
+M3=ufloat(4.06,0) #For Fe(II) pre solution
 m3=fun.ConvertMol(True,M3,gramsOmol,dfDen,Temperature)
-Vol3=ufloat(2.048,0.026)
+#Vol3=ufloat(2.048,0.026)
+Vol3=ufloat(40,0)
 
 WtConcentration1=fun.GetWt(m1,gramsOmol)
 WtConcentration2=fun.GetWt(m2,gramsOmol)
@@ -73,13 +77,15 @@ C2=b2-(M1*b1)/A
 Vol2=C2/C1
 Vol1=(b1-B*Vol2)/A
 
+Vol1=ufloat(Vol1.nominal_value,Vol1.nominal_value*PipettError)
+Vol2=ufloat(Vol2.nominal_value,Vol2.nominal_value*PipettError)
 
 #Check calculation
 #print(M3,Vol3)
 
-#m3,p3,Vol3,Wt,M3=fun.NewConcentration(m1,m2,gramsOmol,
-#                                Temperature,dfDen,
-#                                Vol1,Vol2)
+m3,p3,Vol3,Wt,M3=fun.NewConcentration(m1,m2,gramsOmol,
+                                Temperature,dfDen,
+                                Vol1,Vol2)
 
 #print(M3,Vol3)
 
