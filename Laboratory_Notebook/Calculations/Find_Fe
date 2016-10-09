@@ -38,30 +38,39 @@ import Functions as fun
 # x concentration and y molarity
 # You know the initial molarities, the final volume
 # and molarity
+# Assuming the final density is the density of HNO3
+# at 4 M
 #######################################################
 
+##### HNO3
+gramsOmolHNO3=ufloat(63.0130,0.0012)
 Temperature=ufloat(24.8,3)
-gramsOmol=ufloat(63.0130,0.0012)
 dfDen=pd.read_csv('../Data/Nitric_Acid.csv')
+MHNO3=ufloat(4,0.05)
+mHNO3=fun.ConvertMol(True,MHNO3,gramsOmolHNO3,dfDen,Temperature)
+WtHNO3=fun.GetWt(mHNO3,gramsOmolHNO3)
 
-#M1=ufloat(15.43,0.06)
-M1=ufloat(15.35,0.13)
-m1=fun.ConvertMol(True,M1,gramsOmol,dfDen,Temperature)
+#### Fe Calculation
+
+gramsOmol=ufloat(248.022,0.017)
+
+M1=ufloat(2.302,0.009)
+m1=ufloat(2.717,0.006)
 
 M2=ufloat(0,0)
 m2=ufloat(0,0)
 
-M3=ufloat(1.14,0.08)
-m3=fun.ConvertMol(True,M3,gramsOmol,dfDen,Temperature)
-Vol3=ufloat(2.048,0.026)
+M3=ufloat(0.024,0.001)
+p3=fun.GetDensity(Temperature,WtHNO3,dfDen)
+m3=fun.ConvertMolDenGiven(True,M3,gramsOmol,p3)
+Vol3=ufloat(2,0.02)
 
-WtConcentration1=fun.GetWt(m1,gramsOmol)
-WtConcentration2=fun.GetWt(m2,gramsOmol)
+WtConcentration1=ufloat(40.26,0.05)
+WtConcentration2=ufloat(0,0)
 WtConcentration3=fun.GetWt(m3,gramsOmol)
     
-p1=fun.GetDensity(Temperature,WtConcentration1,dfDen)
+p1=ufloat(1.418,0.005)
 p2=fun.GetDensity(Temperature,WtConcentration2,dfDen)
-p3=fun.GetDensity(Temperature,WtConcentration3,dfDen)
 
 A=(1-WtConcentration1)*p1
 B=(1-WtConcentration2)*p2

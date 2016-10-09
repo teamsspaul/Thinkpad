@@ -66,7 +66,7 @@ stringCalculated=fun.ConvertFractions(string,Mass,MasstoAtom,Zaid)
 
 #Make sure your chemical form has no repeats
 #And no parentheses
-ChemicalFormula='FeH_4N_2O_6S_2'
+ChemicalFormula='HNO_3'
 ChemicalFormulaError=[0,0,0,0,0,0,0] #+/- error in integers of
                                      #chemical formula
 ChemicalFormula=ChemicalFormula+"    "
@@ -100,7 +100,7 @@ Molality=1000/(gramsOmol*(100/WtConcentration-1))
 ############# Convert molality/molarity ###############
 #######################################################
 
-MolarityToMolality=True
+MolarityToMolality=False
 
 gramsOmol=MolarMass
 
@@ -109,8 +109,8 @@ dfDen=pd.read_csv('../Data/Nitric_Acid.csv')
 
 Temperature=ufloat(24.8,3) #Same degrees as dfDen!!!
 
-Molality=Molality
-Molarity=ufloat(15.43,0.06)
+#Molality=Molality
+#Molarity=ufloat(15.43,0.06)
 
 if MolarityToMolality:
     Molality=fun.ConvertMol(MolarityToMolality,Molarity,
@@ -118,7 +118,8 @@ if MolarityToMolality:
 else:
     Molarity=fun.ConvertMol(MolarityToMolality,Molality,
                             gramsOmol,dfDen,Temperature)
-    
+print(Molarity)
+quit()
 
 #print("Molarity = "+str(Molarity))
 #print("Molality = "+str(Molality))
