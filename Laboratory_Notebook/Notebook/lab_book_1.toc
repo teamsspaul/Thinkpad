@@ -8,5 +8,3 @@
 \contentsline {experiment}{\numberline {1}Cycle 1 experiment}{5}{experiment.3.1}
 \contentsline {chapter}{\nonumberline Sunday, 9 October 2016\\ 7:00 pm}{6}{chapter*.5}
 \contentsline {experiment}{\numberline {1}Cycle 1 experiment}{6}{experiment.4.1}
-\contentsline {chapter}{\nonumberline Example}{8}{chapter*.6}
-\contentsline {experiment}{\numberline {1}This shows a sample table}{9}{experiment.5.1}

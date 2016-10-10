@@ -42,7 +42,7 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------
 
-\documentclass[idxtotoc,hyperref,openany]{labbook} % 'openany' here removes the gap page between days, erase it to restore this gap; 'oneside' can also be added to remove the shift that odd pages have to the right for easier reading
+\documentclass[idxtotoc,hyperref,openany,oneside]{labbook} % 'openany' here removes the gap page between days, erase it to restore this gap; 'oneside' can also be added to remove the shift that odd pages have to the right for easier reading
 
 \usepackage[ 
   backref=page,
@@ -263,7 +263,6 @@ $\boxed{\rightarrow Stock}$
 %	LAB BOOK day
 %-----------------------------------------------------------------------
 
-
 \labday{Saturday, 8 October 2016\\ 10:00am - 2:00 pm}
 
 \experiment{Cycle1}
@@ -321,9 +320,9 @@ $\boxed{\rightarrow Stock}$
 \item{-}
 \end{todolist}
 \begin{center}
-15+/-0.15 ml of TBP $\boxed{Stock TBP}$\\
+15+/-0.15 ml of TBP $\boxed{Stock\ TBP}$\\
 +\\
-35+/-0.35 ml of kerosene $\boxed{Stock kerosene}$\\
+35+/-0.35 ml of kerosene $\boxed{Stock\ kerosene}$\\
 =\\
 50+/-0.5 ml of 30 vol.\% TBP.
 $\boxed{\rightarrow TBP}$
@@ -333,25 +332,25 @@ $\boxed{\rightarrow TBP}$
 \item{-}
 \end{todolist}
 \begin{center}
-10.579+/-0.011 ml of 15.35+/-0.13 M HNO\tsbs{3} $\boxed{Stock HNO_3}$\\
+10.579+/-0.011 ml of 15.35+/-0.13 M HNO\tsbs{3} $\boxed{Stock\ HNO_3}$\\
 +\\
-30.355+/-0.030 ml of 0.0+/-0 M HNO\tsbs{3} solution $\boxed{DI Water}$\\
+30.355+/-0.030 ml of 0.0+/-0 M HNO\tsbs{3} solution $\boxed{DI\ Water}$\\
 =\\
 39.94+/-0.14 ml of 4.07+/-0.04 M HNO\tsbs{3} solution
-$\boxed{\rightarrow Fe Prep}$
+$\boxed{\rightarrow Fe\ Prep}$
 \end{center}
 
-To create an Fe solution for a back extraction, $\boxed{Fe Prep}$ should be
-combined in the following manner. (Small portions created because this
-solution has a short half life with larger concentrations of $HNO_3$
+To create an Fe solution for a back extraction, $\boxed{Fe\ Prep}$ should be
+combined in the following manner (Small portions created because this
+solution has a short half life with larger concentrations of $HNO_3$).
 
 \begin{todolist}
 \item{-}
 \end{todolist}
 \begin{center}
-0.0417+/-0.0018 ml of 2.302+/-0.009 M Fe(II) in 0.0+/-0 M HNO\tsbs{3} $\boxed{Stock Fe(II)}$\\
+0.0417+/-0.0018 ml of 2.302+/-0.009 M Fe(II) in 0.0+/-0 M HNO\tsbs{3} $\boxed{Stock\ Fe(II)}$\\
 +\\
-3.941+/-0.027 ml of 0.0+/-0 M Fe(II) in 4.06+/-0.05 M HNO\tsbs{3} solution $\boxed{Fe Prep}$\\
+3.941+/-0.027 ml of 0.0+/-0 M Fe(II) in 4.06+/-0.05 M HNO\tsbs{3} solution $\boxed{Fe\ Prep}$\\
 +\\
 4.000+/-0.020 ml of 0.0240+/-0.0010 M Fe(II) in 4.00+/-0.05 M HNO\tsbs{3} solution
 \end{center}
@@ -390,68 +389,68 @@ solution has a short half life with larger concentrations of $HNO_3$
 %% Final Vial
 %% \end{center}
 
-\labday{Example} % We don't want a date here so we make the labday blank
+%% \labday{Example} % We don't want a date here so we make the labday blank
 
-\begin{center}
-\HRule \\[0.4cm]
-{\huge \textbf{Examples}}\\[0.4cm] % Heading
-\HRule \\[1.5cm]
-\end{center}
+%% \begin{center}
+%% \HRule \\[0.4cm]
+%% {\huge \textbf{Examples}}\\[0.4cm] % Heading
+%% \HRule \\[1.5cm]
+%% \end{center}
 
-%-----------------------------------------------------------------------
-%	Formulae
-%-----------------------------------------------------------------------
-\huge \textbf{Formulae} \\ \\
+%% %-----------------------------------------------------------------------
+%% %	Formulae
+%% %-----------------------------------------------------------------------
+%% \huge \textbf{Formulae} \\ \\
 
-\normalsize \textbf{Formula 1 - Pythagorean theorem}\\ \\
-$a^2 + b^2 = c^2$\\ \\
+%% \normalsize \textbf{Formula 1 - Pythagorean theorem}\\ \\
+%% $a^2 + b^2 = c^2$\\ \\
 
-%--------------------------------------------------------------
-%	Citation
-%--------------------------------------------------------------
+%% %--------------------------------------------------------------
+%% %	Citation
+%% %--------------------------------------------------------------
 
-Citation test \cite{Tatro2013}.
+%% Citation test \cite{Tatro2013}.
 
-%--------------------------------------------------------------
-%	Figure
-%--------------------------------------------------------------
+%% %--------------------------------------------------------------
+%% %	Figure
+%% %--------------------------------------------------------------
 
-\begin{figure}[H] % Example of including images
-\begin{center}
-\includegraphics[width=0.5\linewidth]{Figures/example_figure}
-\end{center}
-\caption{Example figure.}
-\label{fig:example_figure}
-\end{figure}
+%% \begin{figure}[H] % Example of including images
+%% \begin{center}
+%% \includegraphics[width=0.5\linewidth]{Figures/example_figure}
+%% \end{center}
+%% \caption{Example figure.}
+%% \label{fig:example_figure}
+%% \end{figure}
 
-%--------------------------------------------------------------
-%	Table
-%--------------------------------------------------------------
+%% %--------------------------------------------------------------
+%% %	Table
+%% %--------------------------------------------------------------
 
-\experiment{table}
+%% \experiment{table}
 
-\begin{table}[H]
-\begin{tabular}{l l l}
-\toprule
-\textbf{Groups} & \textbf{Treatment X} & \textbf{Treatment Y} \\
-\toprule
-1 & 0.2 & 0.8\\
-2 & 0.17 & 0.7\\
-3 & 0.24 & 0.75\\
-4 & 0.68 & 0.3\\
-\bottomrule
-\end{tabular}
-\caption{The effects of treatments X and Y on the four groups studied.}
-\label{tab:treatments_xy}
-\end{table}
+%% \begin{table}[H]
+%% \begin{tabular}{l l l}
+%% \toprule
+%% \textbf{Groups} & \textbf{Treatment X} & \textbf{Treatment Y} \\
+%% \toprule
+%% 1 & 0.2 & 0.8\\
+%% 2 & 0.17 & 0.7\\
+%% 3 & 0.24 & 0.75\\
+%% 4 & 0.68 & 0.3\\
+%% \bottomrule
+%% \end{tabular}
+%% \caption{The effects of treatments X and Y on the four groups studied.}
+%% \label{tab:treatments_xy}
+%% \end{table}
 
-Table \ref{tab:treatments_xy} shows that groups 1-3 reacted similarly to the two treatments but group 4 showed a reversed reaction.
+%% Table \ref{tab:treatments_xy} shows that groups 1-3 reacted similarly to the two treatments but group 4 showed a reversed reaction.
 
-%------------------------------------------------------------
-%	Bibliography
-%------------------------------------------------------------
-\bibliography{references} 
-\bibliographystyle{plain} 
+%% %------------------------------------------------------------
+%% %	Bibliography
+%% %------------------------------------------------------------
+%% \bibliography{references} 
+%% \bibliographystyle{plain} 
 
 \end{document}
 

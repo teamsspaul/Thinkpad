@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  9 OCT 2016 16:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  9 OCT 2016 20:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -58,6 +58,12 @@ Class scrbook Info: You've used standard option `openany'.
 (scrbook)           If you'd like to set the option with \KOMAoptions,
 (scrbook)           you'd have to use `open=any' there
 (scrbook)           instead of `openany', too.
+Class scrbook Info: You've used standard option `oneside'.
+(scrbook)           This is correct!
+(scrbook)           Internally I'm using `twoside=false'.
+(scrbook)           If you'd like to set the option with \KOMAoptions,
+(scrbook)           you'd have to use `twoside=false' there
+(scrbook)           instead of `oneside', too.
 Class scrbook Info: File `scrsize11pt.clo' used instead of
 (scrbook)           file `scrsize11.clo' to setup font sizes on input line 2251
 .
@@ -74,6 +80,12 @@ Package typearea, 2015/10/03 v3.19a KOMA-Script package (type area)
 
 \ta@bcor=\skip41
 \ta@div=\count79
+Package typearea Info: You've used standard option `oneside'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `twoside=false'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `twoside=false' there
+(typearea)             instead of `oneside', too.
 \ta@hblk=\skip42
 \ta@vblk=\skip43
 \ta@temp=\skip44
@@ -84,8 +96,8 @@ Package typearea Info: These are the values describing the layout:
 (typearea)             \paperwidth      = 597.50793pt
 (typearea)              \textwidth      = 418.25555pt
 (typearea)              DIV departure   = -6%
-(typearea)              \evensidemargin = 47.2316pt
-(typearea)              \oddsidemargin  = -12.5192pt
+(typearea)              \evensidemargin = 17.3562pt
+(typearea)              \oddsidemargin  = 17.3562pt
 (typearea)             \paperheight     = 845.04694pt
 (typearea)              \textheight     = 595.80026pt
 (typearea)              \topmargin      = -25.16531pt
@@ -485,17 +497,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 
-
-{/home/paul/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
-
-] (./lab_book_1.toc)
+{/home/paul/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./lab_book_1.toc)
 \tf@toc=\write5
 \openout5 = `lab_book_1.toc'.
 
- [3
-
-] [4
-
+ [2
 
 ]
 chapter without number
@@ -531,6 +537,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 126.
  [1
 
+
 ] [2]
 chapter without number
 
@@ -547,7 +554,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 267.
+(hyperref)                removing `\\' on input line 266.
 
 [5
 
@@ -555,107 +562,46 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 299.
+(hyperref)                removing `\\' on input line 298.
 
 [6
 
-] [7]
-chapter without number
-
-Underfull \hbox (badness 10000) in paragraph at lines 404--405
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 404--405
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 406--408
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 406--408
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 406--408
-
- []
-
-<Figures/example_figure.png, id=137, 150.5625pt x 90.3375pt>
-File: Figures/example_figure.png Graphic file (type png)
-
-<use Figures/example_figure.png>
-Package pdftex.def Info: Figures/example_figure.png used on input line 421.
-(pdftex.def)             Requested size: 209.12778pt x 125.48878pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8
-
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.447 
-       <./Figures/example_figure.png>] (./lab_book_1.bbl (./lab_book_1.brf)
-\tf@brf=\write6
-\openout6 = `lab_book_1.brf'.
-
-
-[9pdfTeX warning (ext4): destination with the same identifier (name{table.5.1})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1 \begin{thebibliography}{1}
-                              ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 456.
- [10
-
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 456.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 455.
+ [7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 455.
  (./lab_book_1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 456.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 456.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 455.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 455.
 Package rerunfilecheck Info: File `lab_book_1.out' has not changed.
-(rerunfilecheck)             Checksum: 8D4479B570C7496683368BC184EECB32;849.
-Package rerunfilecheck Info: File `lab_book_1.brf' has not changed.
-(rerunfilecheck)             Checksum: 8C2279FBBA34761948D7496668BBB4C9;42.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 456.
+(rerunfilecheck)             Checksum: C07B1F86562F4DA488051C7A0B7C9FE6;729.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 455.
  ) 
 Here is how much of TeX's memory you used:
- 8797 strings out of 494953
- 134130 string characters out of 6180977
- 384282 words of memory out of 5000000
- 11915 multiletter control sequences out of 15000+600000
- 16917 words of font info for 65 fonts, out of 8000000 for 9000
+ 8753 strings out of 494953
+ 133527 string characters out of 6180977
+ 385180 words of memory out of 5000000
+ 11894 multiletter control sequences out of 15000+600000
+ 15965 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  47i,9n,68p,288b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss
-bx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on lab_book_1.pdf (14 pages, 186643 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on lab_book_1.pdf (9 pages, 152558 bytes).
 PDF statistics:
- 223 PDF objects out of 1000 (max. 8388607)
- 188 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 102 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 171 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
