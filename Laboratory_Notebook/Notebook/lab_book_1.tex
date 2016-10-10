@@ -80,6 +80,7 @@
 
 \newexperiment{Notes}{Experiment Notes}
 \newexperiment{Stock}{Stock creation}
+\newexperiment{Cycle1Prep}{Preparation for Cycle 1}
 \newexperiment{Cycle1}{Cycle 1 experiment}
 \newexperiment{table}{This shows a sample table}
 %\newexperiment{shorthand}{Description of the experiment}
@@ -100,7 +101,7 @@
 \end{center}
 }
 \author{\Huge Paul Mendoza \\ \\ \LARGE paul.m.mendoza@gmail.com \\[2cm]}
-\date{Beginning 6 October 2016} 
+\date{This notebook begins 6 October 2016} 
 \maketitle
 
 \tableofcontents
@@ -118,14 +119,14 @@
 %	LAB BOOK day
 %-----------------------------------------------------------------------
 
-\labday{Thursday, 6 October 2016\\ 8:30am - 11:00 am\\ 1:30pm - 5:30pm}
+\labday{Thursday, 6 October 2016\\ 8:30am - 11:00 am\\ 1:30pm - 3:30pm}
 
 \experiment{Notes}
 
 \begin{itemize}
 \item{Project Number: 504370-0001}
 \item{Files on computer saved in C:/Paul\_Mendoza}
-\item{Stock HNO\tsbs{3}: Assuming Temp=24.8+/-3 $\rightarrow\boxed{Stock HNO_3}$}
+\item{Stock HNO\tsbs{3}: Assuming Temp=24.8+/-3 $\rightarrow\boxed{Stock\ HNO_3}$}
   \begin{itemize}
   \item{Molarity : 15.35+/-0.13}
   \item{pH: -1.186+/-0.004}
@@ -134,7 +135,7 @@
   \item{Molar Mass: 63.0130+/-0.0012}
   \item{Density: 1.402+/-0.006}
   \end{itemize}
-\item{Stock Iron Sulfamate $Fe(NH_2SO_3)_2$ $\rightarrow\boxed{Stock Fe(II)}$}
+\item{Stock Iron Sulfamate $Fe(NH_2SO_3)_2$ $\rightarrow\boxed{Stock\ Fe(II)}$}
   \begin{itemize}
   \item{Molarity : 2.302+/-0.009}
   \item{Molality : 2.717+/-0.006}
@@ -194,7 +195,7 @@
 %	LAB BOOK day
 %-----------------------------------------------------------------------
 
-\labday{Friday, 7 October 2016\\ 9:00am - 12:00 am\\ 1:00pm - 5:00pm}
+\labday{Friday, 7 October 2016\\ 9:00am - 12:00 am\\ 1:00pm - 4:00pm}
 
 \experiment{Stock} % 
 
@@ -212,9 +213,9 @@ results shown below}
 \item[\done]{-}
 \end{todolist}
 \begin{center}
-    0.149+/-0.011 ml of 15.43+/-0.06 M HNO\tsbs{3} $\boxed{Stock HNO_3}$\\
+    0.149+/-0.011 ml of 15.43+/-0.06 M HNO\tsbs{3} $\boxed{Stock\ HNO_3}$\\
     +\\
-    1.91+/-0.08  ml of 0.0+/-0 M solution $\boxed{DI Water}$\\
+    1.91+/-0.08  ml of 0.0+/-0 M solution $\boxed{DI\ Water}$\\
     = \\
     2.048+/-0.026 ml of 1.12+/-0.08 M HNO\tsbs{3}
   solution $\boxed{\rightarrow Stock}$ (glass container)
@@ -242,7 +243,7 @@ $\boxed{\rightarrow Stock}$
 \item[\done]{Move shielding back to where it was}
 \end{todolist}
 
-\experiment{Cycle1}
+\experiment{Cycle1Prep}
 \begin{todolist}
 \item[\done]{Count calibration standard Eu-152 in HPGe 3 hours 22 minutes at furtherest position from detector (26 cm)}
   \begin{itemize}
@@ -265,7 +266,7 @@ $\boxed{\rightarrow Stock}$
 
 \labday{Saturday, 8 October 2016\\ 10:00am - 2:00 pm}
 
-\experiment{Cycle1}
+\experiment{Cycle1Prep}
 
 \begin{todolist}
 \item[\done]{Finish background count, lasted 12 hours}
@@ -289,35 +290,65 @@ $\boxed{\rightarrow Stock}$
 \item[\done]{Fix density calculation in code, was slightly wrong before,
   this means $\boxed{Stock}$ and $\boxed{1}$ are slightly different
   from what they should be, but within error}
+\item[\done]{Calculation for creation of Fe(II) solution (next page)}
 \end{todolist}
+\clearpage
+\begin{center}
+  $V_1$ ml of $M_{1,Fe}$ Fe(II) in $M_{1,HNO_3}$ HNO\tsbs{3}\\
+  $+$\\
+  $V_2$ ml of $M_{2,Fe}$ Fe(II) in $M_{2,HNO_3}$ HNO\tsbs{3}\\
+  =\\
+$V_3$ ml of $M_{3,Fe}$ Fe(II) in $M_{3,HNO_3}$ HNO\tsbs{3}.
+\end{center}
+
+The knowns are: \\
+$M_{1,Fe}=2.302$, $\rho_1=1.418$, $M_{1,HNO_3}=0$ (Fe Stock soltuion)\\
+$M_{2,Fe}=0$,$\rho_2=\rho_{HNO_3}(M_{2,HNO_3})$ \\
+$V_3=4$ ml, $M_{3,Fe}=0.024$, $M_{3,HNO_3}=4$, $\rho_3=\rho_{HNO_3}(4M)$\\~\\
+
+Mols of Fe(II) constant: $V_1=\frac{M_{3,Fe}V_3}{M_{1,Fe}}=0.042$\\
+Mols of HNO\tsbs{3} constant: $V_2=\frac{V_3M_{3,HNO_3}}{M_{2,HNO_3}}$\\
+Mass Constant: $V_2=\frac{V_3\rho_3-V_1\rho_1}{\rho_2}$\\~\\
+
+Combine last two equations:$M_{2,HNO_3}-
+\frac{V_3M_{3,HNO_3}\rho_2}{V_3\rho_3-V_1\rho_1}=0$\\~\\
+Solve iteratively (where $M_{2,HNO_3}$ determines $\rho_2$)
+with first guess of:
+$M_{2,HNO_3}=\frac{M_{3,HNO_3}V_3}{V_2}$
+
+
 
 %------------------------------------------------------------------------
 %	LAB BOOK day
 %-----------------------------------------------------------------------
 
-\labday{Sunday, 9 October 2016\\ 7:00 pm}
+\labday{Sunday, 9 October 2016\\ 7:30 pm - 11:30 pm}
 
-\experiment{Cycle1}
+\experiment{Cycle1Prep}
 
 \begin{todolist}
-\item{Prepare for multi contact extraction and back extraction exp}
+\item[\done]{Prepare for multi contact extraction and back extraction exp}
   \begin{itemize}
   \item{Make solution of 30 vol.\% TBP with kerosene}
   \item{Make 40 ml of solution 4.06 M HNO\tsbs{3} solution, }
   \item{Transfer two smaller vials (one for TBP phase), one for
-    Fe phase, with two different lids into glovebox}
+    Fe phase, with two different lids into glovebox (with
+  a larger vial to hold them in the centrifuge)}
   \item{Transfer two smaller vials with centrifuge vials for
     centrifuging, keep one with water 0.3 ml, and TBP mix 0.32 ml, and
-    the second with 1.2 ml of TBP mix and 1.3 ml water}
+    the second with 1.2 ml of TBP mix and 1.25 ml water}
   \item{Transfer $\boxed{Stock}$ and $\boxed{1}$ to glovebox}
   \item{Transfer another vial to hold the Fe solution}
-  \item{Make sure tweezers are transfered in as well - to remove smaller
-  vials from centrifuge tubes}
+  \item{Make sure tweezers are in glovebox (they are) - to remove smaller
+    vials from centrifuge tubes}
+  \item{Transfer slightly contaminated pipette to glovebox}
+  \item{All above vials that would contain solution were rinsed
+    with whatever they would hold for approximately 3 minutes}
   \end{itemize}
 \end{todolist}
 
 \begin{todolist}
-\item{-}
+\item[\done]{-}
 \end{todolist}
 \begin{center}
 15+/-0.15 ml of TBP $\boxed{Stock\ TBP}$\\
@@ -329,7 +360,7 @@ $\boxed{\rightarrow TBP}$
 \end{center}
 
 \begin{todolist}
-\item{-}
+\item[\done]{-}
 \end{todolist}
 \begin{center}
 10.579+/-0.011 ml of 15.35+/-0.13 M HNO\tsbs{3} $\boxed{Stock\ HNO_3}$\\
@@ -352,8 +383,34 @@ solution has a short half life with larger concentrations of $HNO_3$).
 +\\
 3.941+/-0.027 ml of 0.0+/-0 M Fe(II) in 4.06+/-0.05 M HNO\tsbs{3} solution $\boxed{Fe\ Prep}$\\
 +\\
-4.000+/-0.020 ml of 0.0240+/-0.0010 M Fe(II) in 4.00+/-0.05 M HNO\tsbs{3} solution
+4.000+/-0.020 ml of 0.0240+/-0.0010 M Fe(II) in 4.00+/-0.05 M HNO\tsbs{3} solution $\boxed{\rightarrow Bk\ Ex\ Solution}$.
 \end{center}
+
+\begin{todolist}
+\item[\done]{Add Sodium Nitrite to $\boxed{1}$, it will sit overnight,
+but it doesn't have to}
+  \begin{itemize}
+  \item{Dropped $\boxed{1}$, solution probably contaminated blue lid
+    (crap), centrifuged on 1000 rpm for 2 minutes}
+  \end{itemize}
+\end{todolist}
+
+
+%------------------------------------------------------------------------
+%	LAB BOOK day
+%-----------------------------------------------------------------------
+
+\labday{Monday, 10 October 2016\\ 11:30 pm - 5:00 pm}
+
+\experiment{Cycle1}
+\begin{todolist}
+\item{First contact}
+\item{Shake 15 minutes 1500 rpms}
+\item{Change lids}
+\item{Centrifuge for ever}
+\item{Separate Phases}
+\item{Change lids and second contacts...}
+\end{todolist}
 
 
 %----------------------------------------------------------------------
