@@ -54,10 +54,12 @@ M2=ufloat(0,0)
 m2=ufloat(0,0)
 
 #M3=ufloat(1.14,0.08)
-M3=ufloat(4.06,0) #For Fe(II) pre solution
+#M3=ufloat(4.06,0) #For Fe(II) pre solution
+M3=ufloat(4,0)
 m3=fun.ConvertMol(True,M3,gramsOmol,dfDen,Temperature)
 #Vol3=ufloat(2.048,0.026)
-Vol3=ufloat(40,0)
+#Vol3=ufloat(40,0)
+Vol3=ufloat(10,0)
 
 WtConcentration1=fun.GetWt(m1,gramsOmol)
 WtConcentration2=fun.GetWt(m2,gramsOmol)
