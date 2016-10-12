@@ -2,3 +2,10 @@ Sometimes, If you, have 403 error for pushing.
 edit .git/config
 the line: url = ....
 try and add USERNAME@github.com/     ...blah blahh
+
+
+Sometimes, again 403 error
+
+git config -l | grep url
+
+git remote set-url origin "https://github-username@github.com/github-username/github-repository-name.git"
