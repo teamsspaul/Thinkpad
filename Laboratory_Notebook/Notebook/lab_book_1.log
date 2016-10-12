@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  11 OCT 2016 22:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  12 OCT 2016 00:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -373,11 +373,23 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
 )
+(/home/paul/texmf/tex/latex/soul/soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks23
+\SOUL@lasttoken=\toks24
+\SOUL@cmds=\toks25
+\SOUL@buffer=\toks26
+\SOUL@token=\toks27
+\SOUL@spaceskip=\skip52
+\SOUL@ttwidth=\dimen131
+\SOUL@uldp=\dimen132
+\SOUL@ulht=\dimen133
+)
 (/home/paul/texmf/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip52
-\enit@outerparindent=\dimen131
-\enit@toks=\toks23
+\labelindent=\skip53
+\enit@outerparindent=\dimen134
+\enit@toks=\toks28
 \enit@inbox=\box31
 \enitdp@description=\count123
 )
@@ -407,20 +419,20 @@ File: upsy.fd 2001/06/04 font definitions for U/psy.
 )) (./lab_book_1.aux)
 \openout1 = `lab_book_1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
 \AtBeginShipoutBox=\box32
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
@@ -431,7 +443,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 143.
 )
-Package hyperref Info: Link coloring ON on input line 90.
+Package hyperref Info: Link coloring ON on input line 91.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -441,9 +453,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count125
 )
-LaTeX Info: Redefining \ref on input line 90.
-LaTeX Info: Redefining \pageref on input line 90.
-LaTeX Info: Redefining \nameref on input line 90.
+LaTeX Info: Redefining \ref on input line 91.
+LaTeX Info: Redefining \pageref on input line 91.
+LaTeX Info: Redefining \nameref on input line 91.
 
 (./lab_book_1.out) (./lab_book_1.out)
 \@outlinefile=\write4
@@ -453,16 +465,16 @@ LaTeX Info: Redefining \nameref on input line 90.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count126
-\scratchdimen=\dimen132
+\scratchdimen=\dimen135
 \scratchbox=\box33
 \nofMPsegments=\count127
 \nofMParguments=\count128
-\everyMPshowfont=\toks24
+\everyMPshowfont=\toks29
 \MPscratchCnt=\count129
-\MPscratchDim=\dimen133
+\MPscratchDim=\dimen136
 \MPnumerator=\count130
 \makeMPintoPDFobject=\count131
-\everyMPtoPDFconversion=\toks25
+\everyMPtoPDFconversion=\toks30
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -478,17 +490,17 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 107.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 108.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 107.
+LaTeX Font Info:    Try loading font information for U+msa on input line 108.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 107.
+LaTeX Font Info:    Try loading font information for U+msb on input line 108.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -507,11 +519,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 123.
+(hyperref)                removing `\\' on input line 124.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 123.
+(hyperref)                removing `\\' on input line 124.
 
 
 Class scrbook Warning: \float@addtolists detected!
@@ -528,13 +540,13 @@ Class scrbook Warning: \float@addtolists detected!
 (scrbook)              a package that still implements the
 (scrbook)              deprecated \float@addtolist interface .
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 127.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 128.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 127.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 128.
  [1
 
 
@@ -543,16 +555,16 @@ as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.168   \item{
+l.169   \item{
               pH: -1.186+/-0.004}] [2] [3]
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 234.
+(hyperref)                removing `\\' on input line 235.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 234.
+(hyperref)                removing `\\' on input line 235.
 
 [4
 
@@ -560,37 +572,37 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 303.
+(hyperref)                removing `\\' on input line 304.
 
 [6
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 340--344
+Underfull \hbox (badness 10000) in paragraph at lines 341--345
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 340--344
+Underfull \hbox (badness 10000) in paragraph at lines 341--345
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--348
+Underfull \hbox (badness 10000) in paragraph at lines 346--349
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--348
+Underfull \hbox (badness 10000) in paragraph at lines 346--349
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 349--354
+Underfull \hbox (badness 10000) in paragraph at lines 350--355
 
  []
 
 
-Overfull \hbox (7.63692pt too wide) in paragraph at lines 349--354
+Overfull \hbox (7.63692pt too wide) in paragraph at lines 350--355
 \OT1/cmr/m/n/10.95 Solve it-er-a-tively (where $\OML/cmm/m/it/10.95 M[]$ \OT1/c
 mr/m/n/10.95 de-ter-mines $\OML/cmm/m/it/10.95 ^^Z[]$\OT1/cmr/m/n/10.95 ) with 
 first guess of: $\OML/cmm/m/it/10.95 M[] \OT1/cmr/m/n/10.95 = []$ 
@@ -602,7 +614,7 @@ first guess of: $\OML/cmm/m/it/10.95 M[] \OT1/cmr/m/n/10.95 = []$
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 361.
+(hyperref)                removing `\\' on input line 362.
 
 [8
 
@@ -610,7 +622,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 441.
+(hyperref)                removing `\\' on input line 442.
 
 [10
 
@@ -618,7 +630,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 chapter without number
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 530.
+(hyperref)                removing `\\' on input line 531.
 
 
 <Figures/Extraction_Cycle_1_First_3_Counts.png, id=171, 528.47438pt x 532.23843
@@ -626,7 +638,7 @@ pt>
 File: Figures/Extraction_Cycle_1_First_3_Counts.png Graphic file (type png)
  <use Figures/Extraction_Cycle_1_First_3_Counts.png>
 Package pdftex.def Info: Figures/Extraction_Cycle_1_First_3_Counts.png used on 
-input line 562.
+input line 575.
 (pdftex.def)             Requested size: 250.95587pt x 252.74278pt.
  [12
 
@@ -637,37 +649,37 @@ File: Figures/Back_Extraction_Cycle_1_Last_3_Counts.png Graphic file (type png)
 
  <use Figures/Back_Extraction_Cycle_1_Last_3_Counts.png>
 Package pdftex.def Info: Figures/Back_Extraction_Cycle_1_Last_3_Counts.png used
- on input line 571.
+ on input line 584.
 (pdftex.def)             Requested size: 250.95587pt x 233.34389pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 675.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 688.
  [13pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.675 \end{document}
+l.688 \end{document}
                     pdfTeX warning (ext4): destination with the same identifier
  (name{figure.6.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.675 \end{document}
+l.688 \end{document}
                      <./Figures/Extraction_Cycle_1_First_3_Counts.png> <./Figur
 es/Back_Extraction_Cycle_1_Last_3_Counts.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 675.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 688.
  (./lab_book_1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 675.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 675.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 688.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 688.
 Package rerunfilecheck Info: File `lab_book_1.out' has not changed.
-(rerunfilecheck)             Checksum: BEEDDFDBB53D0112A11CDB980763A1C3;1225.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 675.
+(rerunfilecheck)             Checksum: 697F4A5E6ADF32C638F1941613430669;1225.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 688.
  ) 
 Here is how much of TeX's memory you used:
- 8803 strings out of 494953
- 134575 string characters out of 6180977
- 386394 words of memory out of 5000000
- 11923 multiletter control sequences out of 15000+600000
- 15965 words of font info for 62 fonts, out of 8000000 for 9000
+ 8978 strings out of 494953
+ 136726 string characters out of 6180977
+ 390877 words of memory out of 5000000
+ 12093 multiletter control sequences out of 15000+600000
+ 16278 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  47i,12n,68p,288b,509s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -684,7 +696,7 @@ x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on lab_book_1.pdf (15 pages, 208044 bytes).
+Output written on lab_book_1.pdf (15 pages, 209209 bytes).
 PDF statistics:
  247 PDF objects out of 1000 (max. 8388607)
  208 compressed objects within 3 object streams

@@ -58,6 +58,7 @@
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage{mathrsfs}
 \usepackage{amsmath}
+\usepackage{soul}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Command to make the lines in the title page
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
@@ -527,14 +528,14 @@ This experiment had sputtering of pipette at certain times.
 %	LAB BOOK day
 %-----------------------------------------------------------------------
 
-\labday{Tuesday, 11 October 2016\\ 9:00 pm - 11:00 pm}
+\labday{Tuesday, 11 October 2016\\ 10:30 pm - 1:00 am}
 
 \experiment{Cycle1_Counting}
 There are 6 things to count.
 \begin{todolist}
 \item[\done]{Initial solution $\boxed{1}$ - 23 cm away, 0.3 ml HNO\tsbs{3}}
 \item[\done]{Waste $\boxed{1}$ - 23 cm away, 0.3 ml HNO\tsbs{3} 0.2 ml TBP}
-\item{Create 4 M HNO\tsbs{3} solution}
+\item[\done]{Create 4 M HNO\tsbs{3} solution store in fume hood}
 \end{todolist}
 \begin{center}
 2.6056+/-0.0026 ml of 15.35+/-0.13 M HNO\tsbs{3} solution $\boxed{Stock\ HNO_3}$\\
@@ -544,15 +545,27 @@ There are 6 things to count.
 9.985+/-0.035 ml of 4.01+/-0.04 M HNO\tsbs{3} solution $\boxed{\rightarrow 4\ M\ HNO_3}$.
 \end{center}
 \begin{todolist}
-\item{Pull out 0.2 from bottom of $\boxed{1}$ (HNO\tsbs{3}),
+\item[\done]{Pull out 0.2 from bottom of $\boxed{1}$ (HNO\tsbs{3}),
   dillute to 0.3 ml with $\boxed{4\ M\ HNO_3}$ $\boxed{\rightarrow 1W}$}
-\item{Pull out 0.3 ml from $\boxed{3}$ to count
+  \begin{itemize}
+  \item{Count on HPGe $\sim$ 1 hour}
+  \end{itemize}
+\item[\done]{Pull out 0.3 ml from $\boxed{3}$ to count
   $\boxed{\rightarrow 3P}$ (product)}
-\item{Pull out 0.3 ml from top of $\boxed{2}$ (TBP), to count
+  \begin{itemize}
+  \item{Start Count on HPGe 4 hours (left overnight)}
+  \end{itemize}
+\item[\done]{Pull out 0.3 ml from top of $\boxed{2}$ (TBP), to count
        $\boxed{\rightarrow 2W}$ (Waste)}
-\item{Pull out 0.7 ml from top of $\boxed{2}$ (TBP)
+\item{\st{Pull out 0.7 ml from top of $\boxed{2}$ (TBP)
   $\boxed{\rightarrow 2W2}$, then count $\boxed{2}$ - which should
-  have 0.3 ml, 0.1 ml of TBP, and 0.2 ml of HNO\tsbs{3}}
+    have 0.3 ml, 0.1 ml of TBP, and 0.2 ml of HNO}\tsbs{3}}
+  \begin{itemize}
+  \item{Coult not pull out all 0.7, but only 0.6}
+  \end{itemize}
+\item[\done]{Pull out 0.6 ml from top of $\boxed{2}$ (TBP)
+  $\boxed{\rightarrow 2W2}$, should have 0.4 ml, 0.2 ml of TBP,
+  and 0.2 ml of HNO\tsbs{3}}
 \end{todolist}
 
 
