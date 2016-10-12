@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  11 OCT 2016 14:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  12 OCT 2016 01:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -324,15 +324,13 @@ LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <16> not available
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <16> not available
 (Font)              size <17.28> substituted on input line 20.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
-
- []
-
-
-LaTeX Warning: Reference `Tatro2013' on page 1 undefined on input line 33.
-
-(./Start_Document.bbl) [1
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 36.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 36.
+ [1
 
 {/home/paul/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Start_Document.a
 ux)
@@ -340,23 +338,20 @@ ux)
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
 
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 4061 strings out of 494953
- 58910 string characters out of 6180977
- 117365 words of memory out of 5000000
- 7307 multiletter control sequences out of 15000+600000
- 5805 words of font info for 21 fonts, out of 8000000 for 9000
+ 4072 strings out of 494953
+ 59135 string characters out of 6180977
+ 118362 words of memory out of 5000000
+ 7319 multiletter control sequences out of 15000+600000
+ 5716 words of font info for 21 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
- 38i,4n,38p,288b,138s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,4n,38p,288b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Start_Document.pdf (1 page, 59989 bytes).
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Start_Document.pdf (1 page, 54645 bytes).
 PDF statistics:
  24 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream
