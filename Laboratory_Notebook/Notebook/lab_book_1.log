@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  11 OCT 2016 20:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  11 OCT 2016 22:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -620,23 +620,53 @@ chapter without number
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\\' on input line 530.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 645.
-[12
+
+<Figures/Extraction_Cycle_1_First_3_Counts.png, id=171, 528.47438pt x 532.23843
+pt>
+File: Figures/Extraction_Cycle_1_First_3_Counts.png Graphic file (type png)
+ <use Figures/Extraction_Cycle_1_First_3_Counts.png>
+Package pdftex.def Info: Figures/Extraction_Cycle_1_First_3_Counts.png used on 
+input line 552.
+(pdftex.def)             Requested size: 250.95587pt x 252.74278pt.
+ [12
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 645.
+<Figures/Back_Extraction_Cycle_1_Last_3_Counts.png, id=177, 568.37344pt x 528.4
+7438pt>
+File: Figures/Back_Extraction_Cycle_1_Last_3_Counts.png Graphic file (type png)
+
+ <use Figures/Back_Extraction_Cycle_1_Last_3_Counts.png>
+Package pdftex.def Info: Figures/Back_Extraction_Cycle_1_Last_3_Counts.png used
+ on input line 561.
+(pdftex.def)             Requested size: 250.95587pt x 233.34389pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 665.
+ [13pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.665 \end{document}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{figure.6.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.665 \end{document}
+                     <./Figures/Extraction_Cycle_1_First_3_Counts.png> <./Figur
+es/Back_Extraction_Cycle_1_Last_3_Counts.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 665.
  (./lab_book_1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 645.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 645.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 665.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 665.
 Package rerunfilecheck Info: File `lab_book_1.out' has not changed.
 (rerunfilecheck)             Checksum: BEEDDFDBB53D0112A11CDB980763A1C3;1225.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 645.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 665.
  ) 
 Here is how much of TeX's memory you used:
- 8784 strings out of 494953
- 133991 string characters out of 6180977
- 386307 words of memory out of 5000000
- 11911 multiletter control sequences out of 15000+600000
+ 8803 strings out of 494953
+ 134575 string characters out of 6180977
+ 386394 words of memory out of 5000000
+ 11923 multiletter control sequences out of 15000+600000
  15965 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  47i,12n,68p,288b,509s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -654,10 +684,10 @@ x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on lab_book_1.pdf (14 pages, 179461 bytes).
+Output written on lab_book_1.pdf (15 pages, 207551 bytes).
 PDF statistics:
- 236 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
- 39 named destinations out of 1000 (max. 500000)
- 129 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 208 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 139 words of extra memory for PDF output out of 10000 (max. 10000000)
 
