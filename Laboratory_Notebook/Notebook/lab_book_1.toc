@@ -14,5 +14,7 @@
 \contentsline {experiment}{\numberline {2}Counting for Cycle 1 experiment}{11}{experiment.5.2}
 \contentsline {chapter}{\nonumberline Tuesday, 11 October 2016\\ 10:30 pm - 1:00 am}{12}{chapter*.7}
 \contentsline {experiment}{\numberline {1}Counting for Cycle 1 experiment}{12}{experiment.6.1}
-\contentsline {chapter}{\nonumberline Wednesday, 11 October 2016\\ 11:30 am - 1:00 pm}{14}{chapter*.8}
+\contentsline {chapter}{\nonumberline Wednesday, 11 October 2016\\ 11:30 am - 1:30 pm}{14}{chapter*.8}
 \contentsline {experiment}{\numberline {1}Counting for Cycle 1 experiment}{14}{experiment.7.1}
+\contentsline {chapter}{\nonumberline Thursday, 12 October 2016\\ 12:30 am - 4:30 pm}{15}{chapter*.9}
+\contentsline {experiment}{\numberline {1}Counting for Cycle 1 experiment}{15}{experiment.8.1}
