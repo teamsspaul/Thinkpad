@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#This program will search through the RunDirectory and remove old slurm files that do not have "/hr" printed in them
+#this is because the "/hr" prints when the mcnp execution is complete. 
+
+RunDirectory="/yellow/users/paulmmendoza/project/Run_BM_10c"
+
+slurmSearch="slurm"
+
+#Delete slurm files (I am pretty sure this will work if typed like below, but it works the other way too)
+#find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -L "\/hr" % | xargs -I % rm %
+slurmIncompleteDelete="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -L "\/hr" % | xargs -I % rm %)"
+
+

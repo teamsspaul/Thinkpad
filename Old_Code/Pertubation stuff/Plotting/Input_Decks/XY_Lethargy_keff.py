@@ -1,0 +1,164 @@
+
+#!/usr/bin/evn python
+
+#Input deck for XY plot
+
+#############################################################################################################
+############################################# Packages ######################################################
+############################################################################################################# 
+
+import numpy as np
+import Defaults as D
+
+#############################################################################################################
+############################################## Inputs #######################################################
+############################################################################################################# 
+
+###################################################################################################
+####################################### Basic Information #########################################
+###################################################################################################
+
+# This is the directory file name
+filename = "output.csv"
+
+# Do you want to show your figure? If not do you want to save?
+ShowFig = True
+SaveFig = False # If ShowFig=True, the figure will not save
+SaveFigName = "XY_Lethargy_keff.pdf"
+
+PlotType = "XY"   
+
+###################################################################################################
+####################################### Plots? ####################################################
+###################################################################################################
+PlotSetup = [111];LPX = 8;LPY = 8;LPXX = 0.45;LPXY = 0.02;LPYX = 0.05;LPYY = 0.5;SS = 1 # A Single plot
+
+Compare_Data = False            # Select true if the data is to be compared
+filename_2 = "output_10c.csv"  # Make sure this file is stored in the same directory as the first file
+
+Title_subplot = False
+Title_subplot1='ENDF/B-VII.1'   #These will be used if you want them
+Title_subplot2='ENDF/B-VIII.0 $\\mathbf{\\beta}$ 1'
+
+###################################################################################################
+######################################### Legend ##################################################
+###################################################################################################
+
+legend=True
+LegendFontSize=14.2
+
+
+###################################################################################################
+################################## Highlight Certain data #########################################
+###################################################################################################
+
+# If you want to highlight a specific case, choose the case here
+Highlight = False
+HighlightCase = "LEU-COMP-THERM"
+ReduceMarker = 0.4   # Factor by which you want to reduce all other Markers/Alphas
+ReduceAlpha = 0.3
+
+###################################################################################################
+################################### Select data ###################################################
+###################################################################################################
+
+XValues = 7   # Select the X values you want to plot
+YValues = 1
+
+#  array[:,0]  input name
+#         1    k_eff[0]
+#        2      k_eff[1]
+#        3   percent_fiss[0]
+#        4   percent_fiss[1]
+#        5   percent_fiss[2]
+#        6   percent_fiss[3]
+#        7   Avg_E_fiss
+#        8   Avg_l_fiss,file=file_out)
+
+#        9   experimental keff
+#       10   experimental keff error
+
+Group_by = 0   # Plots will be grouped by this index 
+
+#Update the values in index 14 and 15 by dividing by 10 to the power 6
+Updates=["'7'='7'/10**6","'8'='8'/10**6"]
+
+#Updates=["'7'='7'/10**6","'8'='8'/10**6","'11'='1'/'9'"]
+
+
+ERRORBARS=True
+YERROR=2
+
+
+###################################################################################################
+########################################## Grid ###################################################
+###################################################################################################
+
+GridXMinor           = D.GridXMinor         # Grid class
+#GridXMinor.Run       = False               # To have no X Minor grid lines
+
+GridYMinor           = D.GridYMinor         # Grid class
+GridYMinor.alpha     = 0
+#GridYMinor.Run       = False               # To have no Y Minor Grid lines
+
+GridXMajor           = D.GridXMajor         # Grid class
+#GridXMajor.Run       = False               # To have no X Major Grid lines
+
+GridYMajor           = D.GridYMajor         # Grid class
+#GridYMajor.Run       = False               # To have no Y Major Grid lines
+
+###################################################################################################
+######################################### Title ###################################################
+###################################################################################################
+
+Title = 'Average Neutron Fission Energy'
+
+Center_Title = True; No_Title_Mod=False  # This will do the same as above, but can raise and 
+TitleYPosition=1                         # lower the title based on the "TitleYPosition" variable
+
+###################################################################################################
+######################################## X axis ###################################################
+###################################################################################################
+
+ShowXLabels=True                                            # To show the x label
+Xlabel='Energy of average Lethargy causing fission (MeV)'   # X label
+XScale="log"                                                # 'linear' or 'log'
+Xlimits=True                                                # Set xlimits?
+XLim=[10**-8,10]                                            # Limits that will be set
+
+XticksMajor=True                                            # Modify X major ticks?
+Xlabels=['$10^{-8}$','$10^{-7}$','$10^{-6}$','$10^{-5}$',   # Labels for X major ticks
+         '$10^{-4}$','$10^{-3}$','$10^{-2}$','$10^{-1}$',
+         '$10^{0}$','$10^{1}$'] 
+Xlocs=np.array([10**-8,10**-7,10**-6,10**-5,10**-4,10**-3,  # Locations for labels major X ticks.
+       10**-2,10**-1,10**0,10**1])                          # I know its lame, but this 
+                                                            # has to be a numpy array  
+
+XMinorDetails             = D.XMinorDetails                 # tick class
+
+XMajorDetails             = D.XMajorDetails                 # tick class
+
+###################################################################################################
+######################################## Y axis ###################################################
+###################################################################################################
+
+ShowYLabels=True                                     # Show the y labels
+Ylabel='MCNP $k_{eff}$ / Experiment $k_{eff}$'        # Y label
+YFontSize=18                                         # Y label font size
+
+Ylimits=True                                         # Set Ylimits?
+YLim=[0.96,1.03]                                     # Limits that will be set
+
+YticksMajor=True                                     # Modify Y major ticks?
+Ylabels=['0.96','0.97','0.98','0.99',  
+         '1.00','1.01','1.02','1.03']                # Labels for Y major ticks
+Ylocs=[0.96,0.97,0.98,0.99,1.00,1.01,1.02,1.03]      # Locations for labels of y
+                                                     # major ticks
+
+YMinorDetails              = D.YMinorDetails         # tick class
+
+YMajorDetails              = D.YMajorDetails         # tick class
+
+###################################################################################################
+######################################## Markers ##################################################
+###################################################################################################

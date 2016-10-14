@@ -1,0 +1,201 @@
+#!/bin/bash
+#This file will search through the directories defined in the below section.
+#and find outputs for mcnp calculations executed on the back end of a moab system.
+#the output of this program is text to the screen depicting how many of the runs completed or failed.
+#if they failed, then this program provides information on why some of the runs failed.
+#more or less information can be provided by changing the inputs below
+
+###############################################################################################################
+################################################ Inputs #######################################################
+###############################################################################################################
+
+OutputDirectory="/users/pavelg/Inputs_OUTPUT"
+
+RunDirectory="/users/pavelg/RunDir"
+
+slurmSearch="slurm"
+
+#How many slurm file names, inputfile names, and fatal errors to print
+fatalslurmprint="1"
+fatalinputprint="18"
+fatalerrorprint="10"
+
+#How many slurm file names, inputfile name, and last cycles to print
+timeslurmprint="1"
+timeinputprint="1"
+timecycleprint="20"
+
+###############################################################################################################
+################################################ Basic ########################################################
+###############################################################################################################
+
+
+#In order to print all the cycles this should be done
+cutindex="1"
+Addition=1
+if [ $timecycleprint -gt 1 ]; then
+    for ((i=1;i<$timecycleprint;i++)); do
+	Addition=$[$Addition+8]
+	cutindex="${cutindex},${Addition}"
+    done
+fi
+
+
+#Number of moab files in RunDirectory
+moabFiles="$(find $RunDirectory -type f -name "*.moab" | wc -l)"
+
+
+#Number of slurm files in RunDirectory
+slurmFiles="$(find $RunDirectory -type f -name "${slurmSearch}*" | wc -l)"
+
+
+#Number of output files
+O_Output="$(find $OutputDirectory -type f -name "*.o" | wc -l)"
+R_Output="$(find $OutputDirectory -type f -name "*.r" | wc -l)"
+S_Output="$(find $OutputDirectory -type f -name "*.s" | wc -l)"
+M_Output="$(find $OutputDirectory -type f -name "*.m" | wc -l)"
+
+
+#Number of slurm files that completed
+slurmComplete="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "\/hr" % | wc -l)"
+
+#Number of slurm files that did not complete
+slurmIncompleteN="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -L "\/hr" % | wc -l)"
+
+PAVELIncomplete="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -L "\/hr" % | xargs -I % sed -n 's/executing.*name=//p' % | sed -r 's/\/.*\///' | sed -r 's/tasks 24 ;//')"
+
+
+#Number of slurms files that are still running
+slurmrun="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -L "DUE TO TIME" % | xargs -I % grep -L "fatal error" % | xargs -I % grep -L "\/hr" % | wc -l)" 
+
+
+#Time of first slurm file
+FirstSLURM="$(find $RunDirectory -type f -name "${slurmSearch}*" -printf '%C+ %p\n' | sort | head -n 1)"
+FirstDate="$(echo $FirstSLURM | cut -d'+' -f1)"
+FirstTime="$(echo $FirstSLURM | sed "s/${FirstDate}+//" | cut -d'.' -f1)"
+FirstSLURM="$(echo $FirstSLURM | sed 's/.*\///')"
+FirstElapsedTime="$(find $RunDirectory -type f -name "${FirstSLURM}" | xargs -I % sed -n 's/Elapsed time://p' %)"
+FirstInput="$(find $RunDirectory -type f -name "${FirstSLURM}" | xargs -I % sed -n 's/executing.*name=//p' % | sed -r 's/\/.*\///' | sed -r 's/tasks 24 ;//')"
+
+#Time of last slurm file
+LastSLURM="$(find $RunDirectory -type f -name "${slurmSearch}*" -printf '%C+ %p\n' | sort | tail -n 1)"
+LastDate="$(echo $LastSLURM | cut -d'+' -f1)"
+LastTime="$(echo $LastSLURM | sed "s/${LastDate}+//" | cut -d'.' -f1)"
+LastSLURM="$(echo $LastSLURM | sed 's/.*\///')"
+LastElapsedTime="$(find $RunDirectory -type f -name "${LastSLURM}" | xargs -I % sed -n 's/Elapsed time://p' %)"
+LastInput="$(find $RunDirectory -type f -name "${LastSLURM}" | xargs -I % sed -n 's/executing.*name=//p' % | sed -r 's/\/.*\///' | sed -r 's/tasks 24 ;//')"
+
+
+###############################################################################################################
+##########################################  Fatal Error #######################################################
+###############################################################################################################
+
+#Number of Slurm files that failed with fatal error
+slurmFatal="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "fatal error" % | wc -l)"
+#The name of the slurm files
+slurmFatalName="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "fatal error" % | sed -r 's/.*\///')"
+slurmFatalName="$(echo $slurmFatalName | sed 's/.out/.out\n/g')"
+
+#associated input decks
+slurmFatalInputs="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "fatal error" % | xargs -I % sed -n 's/executing.*name=//p' % | sed -r 's/\/.*\///' | sed -r 's/tasks 24 ;//')"
+slurmFatalInputs="$(echo $slurmFatalInputs | sed 's/\./\.i\n/g')"
+#All of the fatal errors
+slurmfatalerrors="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % sed -n '/fatal error/p' %)"
+#slurmfatalerrors="$(echo $slurmfatalerrors | sed 's/fatal error/\nfatal error/g')"
+
+#Make sure the first entries are unique
+if [ $slurmFatal -gt 0 ]; then
+    for ((j=1;j<$fatalerrorprint;j++)); do
+
+        #Cycle through the lines grab a line at a time
+	slurmfatalerrorhold="$(printf "$slurmfatalerrors" | head -n"$j" | tail -n1 )"
+
+        #Remove this line from the error list
+	slurmfatalerrors="$(printf "$slurmfatalerrors" | sed "/${slurmfatalerrorhold}/d")"
+
+        #Re add the first line to the begining of the list
+	slurmfatalerrors="$slurmfatalerrorhold\n$slurmfatalerrors"
+
+    done
+fi
+
+###############################################################################################################
+########################################  Ran out of Time #####################################################
+###############################################################################################################
+
+#Number of Slurm files that ran out of time
+slurmtime="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "DUE TO TIME" % | wc -l)"
+#The name of the slurm files
+slurmtimeName="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "DUE TO TIME" % | sed -r 's/.*\///' )"
+slurmtimeName="$(echo $slurmtimeName | sed 's/.out/.out\n/g')"
+#associated input decks
+slurmtimeInputs="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "DUE TO TIME" % | xargs -I % sed -n 's/executing.*name=//p' % | sed -r 's/\/.*\///' | sed -r 's/tasks 24 ;//')"
+slurmtimeInputs="$(echo $slurmtimeInputs | sed 's/\./\.i\n/g')"
+#Last Cycle completed
+slurmtimeCycle="$(find $RunDirectory -type f -name "${slurmSearch}*" | xargs -I % grep -l "DUE TO TIME" % | xargs -I % tail -n2 % | grep -v 'DUE TO TIME')"
+slurmtimeCycle="$(echo $slurmtimeCycle | cut -d' ' -f${cutindex})"
+
+
+###############################################################################################################
+############################################# Printing  #######################################################
+###############################################################################################################
+
+
+
+
+echo
+echo "The number of moab files in the run directory  = $moabFiles"
+echo
+echo "The number of .o outputs in output directory    = $O_Output"
+echo "The number of .r outputs in output directory    = $R_Output"
+echo "The number of .s outputs in output directory    = $S_Output"
+echo "The number of .m outputs in output directory    = $M_Output"
+echo
+echo "The number of slurm files in the run directory = $slurmFiles"
+echo "The number of runs that have completed         = $slurmComplete (should equal number of .m outputs)"
+echo
+echo "The number of runs that did not complete       = $slurmIncompleteN"
+echo "The number of runs that have fatal errors      = $slurmFatal"
+echo "The number of runs that ran out of time        = $slurmtime"
+echo "The number of runs that are still running      = $slurmrun"
+echo
+echo "The first $fatalslurmprint slurm file names with fatal errors"
+echo
+printf " $slurmFatalName" | head -n"$fatalslurmprint" 
+echo
+echo "The first $fatalinputprint fatal error input file names"
+echo
+printf " $slurmFatalInputs" | head -n"$fatalinputprint"
+echo
+echo "The first $fatalerrorprint unique fatal errors"
+printf "$slurmfatalerrors" | head -n"$fatalerrorprint"
+echo
+echo "The first $timeslurmprint slurm file names for runs that ran out of time"
+echo
+printf " $slurmtimeName" | head -n"$timeslurmprint"
+echo
+echo
+echo "The first $timeinputprint time sensitive input file names"
+echo
+printf " $slurmtimeInputs" | head -n"$timeinputprint"
+echo
+echo
+echo "The first $timecycleprint last cycle completed for runs that ran out of time"
+echo
+echo " $slurmtimeCycle"
+echo
+echo
+
+echo "The first slurm file created was $FirstSLURM which ran ${FirstInput}"
+echo "The run started on $FirstDate around $FirstTime and ran for $FirstElapsedTime"
+echo
+echo "The last slurm file created was $LastSLURM which ran ${LastInput}"
+echo "The run started on $LastDate around $LastTime and ran for $LastElapsedTime"
+echo
+echo
+echo
+echo
+echo "The runs still running  = $PAVELIncomplete"
+
+
+exit

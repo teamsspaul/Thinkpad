@@ -1,0 +1,459 @@
+#!/bin/bash
+
+#This bash file will prepare moab files to run mcnp on the backend of moab
+#the current system number of processors per node is determined
+#estimates on run time are created based on the 'Mhist_hr' variable 
+#The script options are in the section below. a batch file will be created for
+#each input deck.
+#To run all of them, type ./RunBenchmarks 
+
+#################################################################################
+############################# inputs ############################################
+#################################################################################
+
+#Set the DATAPATH variable for the MCNP calculations
+#datapath="$(echo "export DATAPATH=/usr/projects/data/nuclear/mc/Lib80x")"
+datapath="$(echo "echo "HELLO"")"
+
+#Set the output email and moniker
+email=pavelg@lanl.gov
+moniker="pavelg"
+
+#Set the frequency to receive emails. Every 10 jobs? 100?
+emailFreq=50
+
+#Set the directory which contains all the mcnp input files
+#Do not put a slash after your directory
+directory="/users/pavelg/Inputs"
+
+#Set output directory setup. For a single separate directory (preferred), "1" 
+#"0" for all output files to be on the same level as input files
+samedir="1"
+
+#If, samedir="1" (above), the below will name the end part of the output 
+#directory
+outputDirName="OUTPUT"
+
+#For a rerun set below ="1". It not rerun = "0". If rerun then the output
+#directory will be scanned for output files. Outputs without all four
+#.r .s .m .o output files will be rerun. 
+rerun="1"
+
+#If the kcode card is to be changed, provide the original card
+#and the modified card
+Kcode="kcode 10000 1.0 25 5025"
+KcodeOriginal="kcode 10000 1.0 25 5025"
+
+#This is for skips comments in the input deck, to modify the number of mega
+#histories that are run
+MegaHistoriesRun="10,000 x 5,000 = 50"
+MegaHistoriesOriginal="10,000 x 5,000 = 50"
+
+#Estimated M hist/hr for a processor, for runtime estimates
+#The range will vary greatly depending on the complexity of mcnp inputs
+#the number below should be between 0.0001 and 7. 
+#this will affect how quickly resources are allocated
+Mhist_hr=3
+
+#Files to find, this is the search parameter to find which files to run
+files="\"*.i\"" #over 1000 input files
+#files="\"*055.i\" -o -name \"*060.i\"" #2 input files
+#files="\"*10.i\"" #35 input files
+#files="\"*30*.i\"" #6 input files
+#files="\"*PU-MET-FAST-001*.i\"" #2 input files
+
+#If known in advance how many input files are going to be run
+#and if multiple super computers will be used, set these variables accordingly
+#and create moab files for each system.
+#Set StartFile=1 and EndFile=1000000000000000000000 if you only want to use one
+#super computer, if multiple, parse out the files to different systems.
+#Also will need to have different 'RunInputs' and 'ResourcesAvaFile' variables if
+#parsing out to different supercomputers
+StartFile=1
+EndFile=10000000000
+
+#Change the majority of cross sections, example changes 10c to 80c
+#xSecExt="s/10c/80c/g"
+xSecExt="s/10c/10c/g"
+
+#Change individual cross sections, deliminate by semicolon (example below changes 
+#two different x-sections)
+#These cross sections will be changed apart from the global change above
+#xSecInd="s/1001.10c/1001.AAC/g;s/1002.10c/1002.AAc/g"
+xSecInd="s/6012.10c/6012.50c/g;s/6013.10c/6013.42c/g;s/30064.10c/30064.80c/g;s/30065.10c/30065.80c/g;s/30066.10c/30066.80c/g;s/30067.10c/30067.80c/g;s/30068.10c/30068.80c/g;s/30070.10c/30070.80c/g;s/74180.10c/74180.80c/g;s/23051.10c/23051.80c/g;s/23050.10c/23050.80c/g" #for the 70c
+#xSecInd="s/1001.10c/1001.10c/g;s/1001.10c/1001.10c/g"
+select  in ; do
+    $
+done
+
+	xSecInd="s/mt/c /g"
+
+#Batchfile name, this will be the file to run with msub
+RunInputs="RunBenchmarks"
+
+#Check resources bat file, the file above will call this bat file to check if the
+#next job can be submitted
+ResourcesAvaFile="CheckMsubSubmissions.bat"
+
+#This variable determines how many requests will be active on the moab client
+SubmitRequests=30
+
+#################################################################################
+############################ Modification #######################################
+#################################################################################
+
+#Modify the x-section input
+xSecInd="$(echo $xSecInd | sed -e 's/ /NEVERgoingTOfind/g')" #For Pavel
+xSecInd="$(echo $xSecInd | sed -e 's/;/\n/g')"
+#Shorten moniker incase its really long
+moniker=${moniker:0:7}
+
+################################################################################
+############################### New Directory? #################################
+################################################################################
+
+echo
+if [ "$samedir" -eq "1" ]; then
+    #Create new directory if needed
+    output="${directory}_${outputDirName}"
+    #Make a directory for the output files (located on same level as input 
+    #directory)
+    mkdir -p "$output"
+    #Create a variable to count output files
+    CountOutput="find $output -type f -name \\\"*.m\\\" | wc -l"
+    #Create a variable to parse output files
+    outputfilelist="find $output -type f -name "
+    echo "Output files in single directory: $output "
+elif [ "$samedir" -eq "0" ]; then
+    echo "Outputs in the same directory as the input files in directory $directory"
+    #Create a variable to count output files
+    CountOutput="find $directory -type f - name \\\"*.m\\\" | wc -l"
+    outputfilelist="find $directory -type f -name "
+else
+    echo "Improper entry for \$samedir variable, go to inputs section and change."
+    exit
+fi
+
+#Check if there are any residual backup files left
+bfiles="$(echo $files | sed 's/.i/.i.n/g')"
+numBackUpFiles="find $directory -type f -name ${bfiles} | wc -l"
+numBackUpFiles="$(eval $numBackUpFiles)"
+
+if [ "$numBackUpFiles" -gt 0 ]; then
+    if [ "$rerun" -eq 0 ]; then
+	echo "Warning some residual backup input decks remain"
+	echo "This is not a rerun, please be concerned..."
+	echo "very concerned, check your input files"
+	echo
+	exit
+    fi
+    echo "Previous run did not complete as some residual backup input decks remain."
+    echo 
+    BackUpFileNames="find $directory -type f -name ${bfiles}"
+    BackUpFileNames="$(eval $BackUpFileNames)"
+
+    for ((i=1;i<=$numBackUpFiles;i++)); do
+	BackUpFileName="$(echo $BackUpFileNames | cut -d' ' -f$i)"
+	Nodotn="$(echo $BackUpFileName | rev | sed 's/n\.//' | rev)"
+	mv $BackUpFileName $Nodotn
+    done
+fi
+
+################################################################################
+########################## Number of input files ###############################
+################################################################################
+
+findfiles="find $directory -type f -name $files"
+filelist="$(eval $findfiles)"
+
+if [ "$rerun" -eq "0" ]; then #not a rerun
+    NumOfFiles="$findfiles | wc -l"
+    NumOfFiles="$(eval $NumOfFiles)" #count number of files
+elif [ "$rerun" -eq "1" ]; then #a rerun
+    check="0"
+    NumOfFiles="0"
+    for i in $(echo $filelist); do #Loop over all files
+	input="$(echo $i | rev | sed -nr 's/i\.//p' | rev)" #Remove the .i extension
+	sum="0"
+	if [ "$samedir" -eq "1" ]; then #All output files in one directory
+	    #Get end file name
+	    test="$(echo $input | sed -nr 's/(\/.*\/)+//p')"
+	    input="${output}/${test}."
+	else #All output files in same directory as input
+	    input="${input}."
+	    output="$(echo $i | sed -nr 's/\/[^\/]+\.i//p')" #removes the file name and the last slash
+	fi
+    
+        #check if output file exists from previous run, if so delete
+	findoutput="find $output -type f -wholename ${input}"
+    
+	findr="${findoutput}r | wc -l"
+	isr="$(eval $findr)"
+	finds="${findoutput}s | wc -l"
+	iss="$(eval $finds)"
+	findm="${findoutput}m | wc -l"
+	ism="$(eval $findm)"
+	findo="${findoutput}o | wc -l"
+	iso="$(eval $findo)"
+
+	if [ "$isr" -eq 1 ]; then
+	    sum=$[$sum+1]
+	fi
+	if [ "$iss" -eq 1 ]; then
+	    sum=$[$sum+1]
+	fi
+	if [ "$ism" -eq 1 ]; then
+	    sum=$[$sum+1]
+	fi
+	if [ "$iso" -eq 1 ]; then
+	    sum=$[$sum+1]
+	fi
+       
+	if [ "$sum" -lt 4 -a "$check" -eq "0" ]; then #If all output files don't exist
+	    tempfilelist=$i #add the file to tempfilelist
+	    check="1"
+	    NumOfFiles=$[$NumOfFiles+1]
+	elif [ "$sum" -lt 4 -a "$check" -eq "1" ]; then 
+	    tempfilelist="${tempfilelist} ${i}"
+	    NumOfFiles=$[$NumOfFiles+1]
+	fi
+    done
+
+    filelist=$tempfilelist
+else #invalid entry
+    echo "Improper entry for \$rerun variable, go to inputs section and change"
+fi
+
+if [ "$NumOfFiles" -eq 0 ]; then
+    echo "No input files to run, exiting script"
+    echo
+    exit
+fi
+
+##############################################################################
+########################## Check if EndFile - StartFile > NumOfFiles
+##############################################################################
+
+RNumOfFiles="$(echo "$EndFile-$StartFile" | bc)"
+
+if [ $RNumOfFiles -gt $NumOfFiles ]; then
+    echo
+    echo "Changing start and end files to 1 and $NumOfFiles"
+    echo
+    StartFile=1
+    EndFile=$NumOfFiles
+fi
+
+
+###############################################################################
+#################### Determine node and processor information #################
+###############################################################################
+
+#String should be "#_nodes_used of tot_nodes"
+AllNodes="$(showq | sed -nr 's/nodes active //p' | sed -nr 's/\([0-9]*.[0-9]*%\)//p' | sed -nr 's/\s*//gp' | sed -nr 's/of/ of /p')"
+
+#String should be "#_proc_used of tot_proc"
+AllProcessors="$(showq | sed -nr 's/processors in use by local jobs //p' | sed -nr 's/\([0-9]*.[0-9]*%\)//p' | sed -nr 's/\s*//gp' | sed -nr 's/of/ of /p' | sed -nr 's/[0-9]*activejobs//p')"
+
+#Total Number of processors and nodes
+MaxNodes="$(echo $AllNodes | sed -nr 's/[0-9]* of //p')"
+MaxProc="$(echo $AllProcessors | sed -nr 's/[0-9]* of //p')"
+
+#Number of processors per node
+ProcPerNode="$(echo "($MaxProc/$MaxNodes)" | bc)"
+
+#Look into the kcard variable specified to determine how many particles and cycles
+Kcard="$(echo $Kcode | sed -nr 's/kcode //p' | sed -nr 's/\.0//p')"
+ParticlesPerCycle="$(echo $Kcard | sed -nr 's/ [0-9]* [0-9]* [0-9]*//p')"
+Cycles="$(echo $Kcard | sed -nr 's/[0-9]* [0-9]* [0-9]* //p')"
+
+#Calculate the number of mega histories per input
+MhistPerIn="$(echo "scale=4; ($Cycles*$ParticlesPerCycle)/1000000" | bc)"
+
+#Calcualte the total number of mega histories job will use
+TotMhist="$(echo "scale=4;($MhistPerIn*$NumOfFiles)" | bc)"
+
+#Let the user know, so they may ask for the proper resources
+echo
+echo " Number of MCNP input files in directory: '${directory}' = $NumOfFiles"
+echo " Number of M neutron histories per input: $MhistPerIn"
+echo "Tot Number of M neutron histories to run: $TotMhist"
+echo "               Number of nodes on server: $MaxNodes"
+echo "            Numer of processors per node: $ProcPerNode"
+echo
+echo "The following assumes a processor can handle $Mhist_hr M Hist/hr"
+echo "and that each job uses a whole node."
+echo
+
+ExpectedSpeed="$(echo "$Mhist_hr*$ProcPerNode" | bc)"
+Expectedtimehrs="$(echo "scale=5;$MhistPerIn/$ExpectedSpeed" | bc)"
+Expectedtimesec="$(echo "$Expectedtimehrs*3600/1+1" | bc)"
+waittimesec="$(echo "$Expectedtimesec/6" | bc)"
+
+echo "The average speed of input deck calculation should be $ExpectedSpeed M hist/hr."
+echo "The average amount of time for each job should be $Expectedtimehrs hrs or $Expectedtimesec secs. "
+echo
+
+###################### Create all run_moabfile #####################################
+
+#Count the number of jobs submitted
+Cycle=1
+emailcount="1.00000"
+
+#Count the file we are on
+FileNumber=0
+
+echo "#!/bin/bash" > $RunInputs
+chmod +x $RunInputs
+
+#If all the .moab files are not running, check which ones aren't
+#echo $filelist > "filelist.txt"
+
+#Cycle over all the files
+for i in $(echo $filelist); do
+
+    FileNumber=$[$FileNumber+1]
+
+    
+    if [ $FileNumber -lt $StartFile -o $FileNumber -gt $EndFile ]; then
+	continue
+    fi
+
+    #Get File Name
+    input="$(echo $i | rev | sed -nr 's/i\.//p' | rev)" #Remove the .i extension
+    filename="$(echo $input | sed -nr 's/(\/.*\/)+//p')"
+    
+    #Set moab run file name, but append if we have seen same file name before
+    SeenFileBefore="$(cat $RunInputs | sed -n "/${filename}/p"  | wc -l)"
+    if [ $SeenFileBefore -gt 0 ]; then
+	SeenFileBefore=$[$SeenFileBefore+1]
+	filename="${filename}-$SeenFileBefore"
+    fi
+    BatchFileName="${filename}.moab"
+
+
+
+    #implement the run in the master run command
+    echo "msub $BatchFileName" >> $RunInputs
+    #Check if we want to submit another msub command 
+    echo "./${ResourcesAvaFile} $Cycle" >> $RunInputs
+
+    if [ "$samedir" -eq "1" ]; then #All output files in one directory
+	input="${output}/${filename}."
+    else #All output files in same directory as input
+	input="${input}."
+	output="$(echo $i | sed -nr 's/\/[^\/]+\.i//p')" #removes the file name and the last slash
+    fi
+
+    echo "#!/bin/bash" > $BatchFileName
+    echo "##### These lines are for Moab" >> $BatchFileName
+    echo "#MSUB -l nodes=1:ppn=$ProcPerNode,walltime=$Expectedtimesec" >> $BatchFileName
+    echo "#MSUB -V" >> $BatchFileName
+
+    #Check if we email this one
+    division="$(echo "$Cycle/$emailFreq==$emailcount" | bc)"
+    if [ $division -eq 1 ]; then
+	echo "#MSUB -m abe" >> $BatchFileName
+	echo "#MSUB -M $email" >> $BatchFileName
+	emailcount="$(echo "scale=5;$emailcount+1.00000" | bc)"
+	echo "Will receive email confirmation when ${filename}.i runs."
+    fi
+    echo >> $BatchFileName
+    echo "##### These are shell commands" >> $BatchFileName
+    echo $datapath >> $BatchFileName
+    echo >> $BatchFileName
+    echo >> $BatchFileName
+    echo "##### Launch parallel job using srun" >> $BatchFileName
+    
+    chmod +x $BatchFileName
+
+    #Copy input deck to same location but with a .n extension (copy)
+    echo "cp $i ${i}.n" >> $BatchFileName
+
+    for Indxchange in $(echo $xSecInd); do #Loop over all individual x section changes 
+        #Change individual x-sections for all files
+	Indxchange="$(echo $Indxchange | sed -e 's/NEVERgoingTOfind/ /g')" #For Pavel
+	echo "sed -i \"$Indxchange\" $i" >> $BatchFileName
+    done
+
+    #Change all other cross sections
+    echo "sed -i \"$xSecExt\" $i" >> $BatchFileName
+    #Change all the kcodes
+    echo "sed -i \"s/${KcodeOriginal}/${Kcode}/\" $i" >> $BatchFileName
+    #Change hist calc
+    echo "sed -i \"s/${MegaHistoriesOriginal}/${MegaHistoriesRun}/\" $i" >> $BatchFileName
+
+        
+    #check if output file exists from previous run, if so delete
+    findoutput="find $output -type f -wholename ${input}"
+    
+    findr="${findoutput}r | wc -l"
+    isr="$(eval $findr)"
+    finds="${findoutput}s | wc -l"
+    iss="$(eval $finds)"
+    findm="${findoutput}m | wc -l"
+    ism="$(eval $findm)"
+    findo="${findoutput}o | wc -l"
+    iso="$(eval $findo)"
+
+    if [ "$isr" -eq 1 ]; then
+	rm "${input}r"
+    fi
+    if [ "$iss" -eq 1 ]; then
+	rm "${input}s"
+    fi
+    if [ "$ism" -eq 1 ]; then
+	rm "${input}m"
+    fi
+    if [ "$iso" -eq 1 ]; then
+	rm "${input}o"
+    fi
+
+    #The MCNP command
+    echo "mcnpexe.pl -6 inp=${i} name=${input} tasks $ProcPerNode" >> $BatchFileName 
+    
+    Cycle=$[$Cycle+1]
+
+    #move the copied input deck to override the changes made to the original
+    echo "mv ${i}.n $i" >> $BatchFileName
+
+done
+
+
+
+###################### Create a resources check bat file #####################################
+
+echo "#!/bin/bash" > $ResourcesAvaFile
+echo "#This script pauses if you asked for too many resources." >> $ResourcesAvaFile
+echo >> $ResourcesAvaFile
+echo "JobsRun=\"ljobs | sed -n '/${moniker}/p' | wc -l\"" >> $ResourcesAvaFile
+echo "SubmitRequests=\"$SubmitRequests\"" >> $ResourcesAvaFile
+echo >> $ResourcesAvaFile
+echo >> $ResourcesAvaFile
+
+echo "JobsRunning=\"\$(eval \$JobsRun)\"" >> $ResourcesAvaFile
+echo "SubmitsAva=\"\$(echo \"(\$SubmitRequests-\$JobsRunning)\" | bc)\"" >> $ResourcesAvaFile
+
+echo >> $ResourcesAvaFile
+echo "while [ \$SubmitsAva -le \"0\" ];do" >> $ResourcesAvaFile
+echo "sleep $waittimesec" >> $ResourcesAvaFile
+echo "JobsRunning=\"\$(eval \$JobsRun)\"" >> $ResourcesAvaFile
+echo "SubmitsAva=\"\$(echo \"(\$SubmitRequests-\$JobsRunning)\" | bc)\"" >> $ResourcesAvaFile
+echo "done" >> $ResourcesAvaFile
+
+
+chmod +x $ResourcesAvaFile
+
+
+##################### Run all moab files #######################################
+
+#./RunBenchmarks &
+#./${RunInputs} &
+
+#################### Remove the run_moabfile #####################################
+#rm *.moab
+
+#rm $ResourcesAvaFile
+#rm CheckMsubSubmissions.bat
+
+####################### Useful sed commands #####################################
