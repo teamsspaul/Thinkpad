@@ -1,8 +1,0 @@
-File Name,k-eff_o,std_o,therm fiss,int fiss,fast fiss,above therm fiss, Avg E, Avg leth causing fiss
-Leu-comp-therm-case-1-2r,0.98165,0.0003,74.56,15.32,10.12,25.44,290370,0.75112
-Leu-comp-therm-case-1-1r,0.62271,0.00027,42.72,32.81,24.48,57.28,652120,46.268
-Leu-comp-therm-case-1-3r,0.99595,0.00028,83.31,9.7,6.99,16.69,205710,0.25934
-Leu-comp-therm-case-1-4r,0.76932,0.00026,88.91,5.95,5.13,11.09,154990,0.13233
-Leu-comp-therm-case-1-5r,0.51076,0.00025,90.22,4.72,5.06,9.78,153710,0.11738
-Leu-comp-therm-case-1-6r,0.37363,0.00021,90.01,4.43,5.56,9.99,169310,0.12541
-Leu-comp-therm-case-1-7r,0.29447,0.00018,89.54,4.25,6.21,10.46,189100,0.13925

@@ -63,8 +63,6 @@ class grids:
 BenchmarkInfoDir = os.getcwd()+"/"
 OutputDir=BenchmarkInfoDir+"figures/"
 
-DataLocation=BenchmarkInfoDir+"Data_To_Plot/"
-
 # This is the directory file name
 filename = "output_80c.csv"
 
@@ -76,39 +74,19 @@ FigureSize = (11, 6) # Dimensions of the figure
 # Do you want to show your figure? If not do you want to save?
 ShowFig = False
 SaveFig = False # If ShowFig=True, the figure will not save
-SaveFigName = "Default_name_for_figure.pdf"
+SaveFigName = "XY_Lethargy_BR_H_LEU-COMP-THERM.pdf"
 
-TypeOfFamily='monospace'   #This sets the type of font for text on plot
-font = {'family' : TypeOfFamily}  # This sets the type of font for text on plot
+font = {'family' : 'monospace'}  # This sets the type of font for text on plot
 
 PlotType = "XY"   
 
                     # Options: "XY" (using "XValues" and "YValues"
                     #          "Hist" (Make hist out of "XValues") 
                     #          "Bar"  (Makes Bar with "XValues" bars of "Group_by")
-
-
-
+                    #          "Pie"     
 
 # For histogram
-HistColor = 'green';        #The color of the bars
-HistEdgeColor='k'           #The edge color of the bars
-HistAlpha = 0.8;            #opacity of the hist bars
-numBins = 50;               #number of bins 
-HISTTEXTTIME=False          #For looking at time, if you want to add a textbox
-                            #stating what percentage of runs were under 10,20,30 and 40 minutes put true
-
-
-HISTTIMEX=0.70              #location of hist box (default for only one axis)
-HISTTIMEY=0.95
-HISTalign='top'             #'top' 'bottom' 'center' 'baseline' (location of box)
-HISTprops=dict(boxstyle='round',facecolor='wheat',alpha=1) #Details for your box
-GaussFit=False
-GaussStyle='dashed';GaussMarker='.';GaussColor='green';Gaussmarkersize=8;GaussAlpha=1;
-GaussLineWidth=2
-
-
-
+HistColor = 'green';HistAlpha = 0.8;numBins = 50;HistEdgeColor='k'
 # For Bar              
 Width=0.5;                  # Width of each Bar
 HalfBarWidth=0.25;          # Half width of each Bar (make sure xlimits are set with this)
@@ -122,7 +100,6 @@ Compare_Bar='r';            # Color of the line for "Compare_Bar"
 C_BarLine='-';              # Type of line for the "Compare_Bar"
 NumberOfPointsBar=25        # Number of points for the line
 C_BarAlpha=0.35             # opacity of "Compare_Bar"
-C_linewidth=2               # linewidth of "Compare_Bar"
 
 # For NonBar
 HalfBarWidth=0
@@ -148,7 +125,6 @@ filename_2 = "output_10c.csv"  # Make sure this file is stored in the same direc
 # A_Variable_That_I_Will_Never_Use in the plotting file and in that section modify what you will, 
 # some options are shown there
 
-
 Title_subplot = False
 Title_subplot1 = "80c"         # These will be used if you want them
 Title_subplot2 = "10c"
@@ -156,21 +132,14 @@ Title_subplot2 = "10c"
 TitleSFontSize = 16            # Font size and weight for sub plot titles
 TitleSFontWeight = 'normal'    # 'bold' or 'normal'
 
-tfont=font
-
 ###################################################################################################
 ######################################### Legend ##################################################
 ###################################################################################################
 
 legend = False           # Add legend to plot?
-LegendFontSize = 12
+LegendFontSize = 8
                         # Defaults to right side of plot on outside
                         # Can change http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.legend
-
-LegendWeight='normal'  #'normal' or 'heavy'
-
-Lfont = {'family' : TypeOfFamily}  # This sets the type of font for legend on plot
-Lfont['size']=LegendFontSize
 
 SquishGraph = 0.75      # Squeeze plots by this factor to fit legend outside of plot
 
@@ -196,10 +165,6 @@ HighlightCase = "LEU-COMP-THERM"
 ReduceMarker = 0.7   # Factor by which you want to reduce all other Markers/Alphas
 ReduceAlpha = 0.6
 
-# If you want to omit certain cases
-OmitCases=["Do_Not_Omit_Anything"]
-
-
 ###################################################################################################
 ################################### Select data ###################################################
 ###################################################################################################
@@ -208,7 +173,7 @@ OmitCases=["Do_Not_Omit_Anything"]
 #XValues = 15
 # XValues=1000     # This plots the index values on the x axis (not set up for y axis)
 # XValues=1
-YValues = 7
+#YValues = 7
 
 Second_Y_Values=False
 YValues2=6
@@ -230,19 +195,12 @@ YValues2=6
 #      array[:,15] = the average neutron lethargy causing fission ev
 
 Group_by = 0   # Plots will be grouped by this index 
-Group_by2 = "None"    #If you want to have a subgroup, you may
-                      #put in text the subgroup you would like
+Group_by2 = "None"
 
 #Update the values in index 14 and 15 by dividing by 10 to the power 6
-Updates=["'14'='14'/10**6","'15'='15'/10**6"]                            
+Updates=[]
 
-ERRORBARS=False     #If you want error bars, set to true
-ERRORFILL=False     #Please only pick one or the other (ERRORBARS ERRORFILL)
-YERROR=None         #Add integer which corresponds to index above (8 = std)
-XERROR=None         #Add integer which correspond to index for error if no error bars set to None
 
-#For filling
-Alpha_ValueE=[0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3]
 
 ###################################################################################################
 ########################################## Grid ###################################################
@@ -285,7 +243,6 @@ TitleFontWeight = "bold"  # "bold" or "normal"
 TitleXPosition = 0.42     # Set title location of plots
 TitleYPosition = 0.98
 
-Tfont=font
 #Center_Title = True; No_Title_Mod=True   # This will center the title on the figure 
                                          # as a whole even with a legend
 
@@ -402,9 +359,6 @@ Colors=["aqua","gray","red","blue","black","green","magenta","indigo","lime","pe
 Alpha_Value=[1  ,1  ,1  ,1  ,1  ,1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]
 MarkSize=   [8  ,8  ,8  ,8  ,8  ,8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8]
 
-
-Linewidth=[1  ,1  ,1  ,1  ,1  ,1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]
-
 MarkerType=["8","s","p","D","*","H","h","d","^",">"] # Can change all these to "." or "" for nothing "x" isn't that good
                                                      # "*" "H" "h" "d" "^" ">" good ones
                                                      # http://matplotlib.org/1.4.1/api/markers_api.html for more options
@@ -517,7 +471,6 @@ def File_To_Plotable_Matrix(Directory,filename):
     Cols=int(len(array)/Rows)
 
     array=np.reshape(array,(Rows,Cols))
-
 
     length=len(array[:,1]) #Determine number of lines in the file
     index=range(1,length) #create an index variable, subtract 1 because we are getting rid of the first
@@ -776,19 +729,6 @@ def update_columns_data(a,text):
         quit()
 
 
-
-    #String of replaces
-    for i in range(0,int(len(Positions)/2)):
-
-        #Start and end positions for string (if this is the first occurance)
-        Start=Positions[i*2]
-        End=Positions[i*2+1]+1
-        try:
-            StringOfReplaces=np.append(StringOfReplaces,text[Start:End])
-        except NameError:
-            StringOfReplaces=text[Start:End]
-
-
     #Replace whats inbetween (') characters with 'Replacement' (XXXXX is changed to what was inbetween ('))
     Replacement="a[i,XXXXX]"
     for i in range(0,int(len(Positions)/2)):
@@ -796,7 +736,7 @@ def update_columns_data(a,text):
         #Start and end positions for string (if this is the first occurance)
         Start=Positions[i*2]
         End=Positions[i*2+1]+1
-        
+
         #If not first iteration, then positions will have shifted by
         #the length of 'Replacement'
         if i != 0:
@@ -815,19 +755,16 @@ def update_columns_data(a,text):
         if i != 0:
             Replacement_="float("+Replacement_+")"
 
-        ### Use if some things are not workin
-        To_Replace=StringOfReplaces[i]
-
         #Act of replacement
         text=text.replace(To_Replace,Replacement_,1)
-        
+
 
 ####################################################################
 ####################################################################
+
     #Make the modification and save in a holdarray
     text_try="holdarray=np.vstack((holdarray,str("+text.split("=")[1]+")))"
     text_except="holdarray=str("+text.split("=")[1]+")"
-
 
     for i in range(0,len(a[:,0])):
         try:
