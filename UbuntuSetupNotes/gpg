@@ -1,0 +1,11 @@
+gpg --gen-key
+
+keysize 4096
+
+key valid for 0
+is this correct y
+Paul Mendoza
+paul....blah
+O
+
+Enter secure pasphrase
