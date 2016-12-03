@@ -9,3 +9,17 @@ paul....blah
 O
 
 Enter secure pasphrase
+
+
+https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages-on-an-ubuntu-12-04-vps
+
+
+to encrypt
+
+gpg -c important.docx
+
+to decrypt
+
+gpg important.dox.gpg
+
+Gpg4win for windows users
