@@ -1,8 +1,6 @@
 
-  102  sudo apt-get -y install python-pip  #Get pip for python 2
-  103  sudo pip install matplotlib         #Get matplotlib for python 2
 
-  105  sudo apt-get -y install python3-pip #Get pip for python three
+105  sudo apt-get -y install python3-pip #Get pip for python three
 
 
   117  sudo apt-get build-dep python-matplotlib #I think this failed
@@ -11,6 +9,16 @@
 
   126  sudo apt-get install libfreetype6-dev    #install this? for plot
   127  sudo -H pip3 install matplotlib          #Install matplotlib
+
+
+
+
+
+
+
+
+
+
 
 sudo apt-get install dvipng   #important for plotting
 
@@ -28,3 +36,20 @@ matplotlib.matplotlib_fname()
 #Need to sudo edit this file to change the line with backend to
 #something like this
 backend : qt5agg
+
+
+
+
+
+
+
+For this Error
+This application failed to start because it could not find or load the Qt platform plugin "xcb"
+in "".
+
+https://github.com/ContinuumIO/anaconda-issues/issues/1249
+
+#I think anaconda 4.2 has a problem with using matplotlib1.5.3
+#This should help
+conda install matplotlib=1.5.1
+#Still errors after this 
