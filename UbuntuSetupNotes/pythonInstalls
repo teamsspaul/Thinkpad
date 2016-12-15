@@ -12,6 +12,8 @@
 
 
 
+#To install a package!!!!
+sudo python setup.py install
 
 
 
