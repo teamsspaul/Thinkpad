@@ -15,3 +15,13 @@ tlmgr option repository ftp://tug.org/historic/systems/texlive/2015/tlnet-final
 
 tlmgr update <package name>   #update package
 tlmgr update --self --all     #update all packages
+
+
+#A way to install packages
+
+Installation
+
+mkdir -p ~/Library/texmf/tex/latex/local
+cd ~/Library/texmf/tex/latex/local
+git clone git@github.com:alecjacobson/coloremoji.sty.git
+texhash coloremoji.sty
