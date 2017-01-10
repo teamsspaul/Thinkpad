@@ -1,0 +1,2 @@
+find . -type f -name "*" | xargs -I % grep -H 'pandas' %
+Find all files that list the word pandas, print file name and line
