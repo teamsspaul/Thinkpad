@@ -17,7 +17,16 @@ sudo python setup.py install
 
 
 
-
+######Create an environment for python2.7 (with anaconda 3)
+conda create -n python2 python=2.7 anaconda
+###Activate environment
+source activate python2
+### Deactivate
+source deactivate python2
+##To list all of your packages installed into a non-active environment named snowflakes:
+conda list -n snowflakes
+##Install to specific environment
+conda install --name snowflakes beautiful-soup
 
 
 
