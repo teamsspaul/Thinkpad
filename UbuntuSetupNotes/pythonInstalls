@@ -28,7 +28,9 @@ conda list -n snowflakes
 ##Install to specific environment
 conda install --name snowflakes beautiful-soup
 
-
+#After installing python 2, you need to add it to your path
+#also need to type
+conda install --name python2 libgcc
 
 
 sudo apt-get install dvipng   #important for plotting
